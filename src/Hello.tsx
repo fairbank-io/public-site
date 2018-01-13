@@ -11,16 +11,16 @@ class Hello extends React.Component<Props, object> {
   }
 
   public render(): JSX.Element {
-    let level = this.props.enthusiasmLevel || 0;
+    const { name, enthusiasmLevel = 1 } = this.props;
 
-    if (level <= 0) {
+    if (enthusiasmLevel <= 0) {
       throw new Error('Not enthusiastic enough! :D');
     }
 
     return (
       <div className="hello">
         <div className="greeting">
-          Hello {this.props.name + this.getEnthusiasmChars(level)}
+          Hello {name + this.getEnthusiasmChars(enthusiasmLevel)}
         </div>
       </div>
     );
