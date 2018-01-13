@@ -5,9 +5,22 @@ import 'core-js/es6/set';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Hello from './Hello';
+
+// Initial state
+import { createStore } from 'redux';
+import { enthusiasm } from './state/reducer';
+import { StoreState } from './state/index';
+const store = createStore<StoreState>(enthusiasm, {
+  enthusiasmLevel: 1,
+  languageName: 'TypeScript',
+});
+
+import Hello from './containers/Hello';
+import { Provider } from 'react-redux';
 
 ReactDOM.render(
-  <Hello name="FairBank" enthusiasmLevel={2} />,
+  <Provider store={store}>
+    <Hello />
+  </Provider>,
   document.getElementById('root') as HTMLElement
 );
