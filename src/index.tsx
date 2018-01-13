@@ -8,8 +8,8 @@ import * as ReactDOM from 'react-dom';
 
 // Initial state
 import { createStore } from 'redux';
-import { enthusiasm } from './state/reducer';
-import { StoreState } from './state/index';
+import { enthusiasm } from 'state/reducer';
+import { StoreState } from 'state/index';
 const store = createStore<StoreState>(enthusiasm, {
   enthusiasmLevel: 1,
   languageName: 'TypeScript',
