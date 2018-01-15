@@ -3,11 +3,14 @@
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 
+// Load application styles
+import 'index.css';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Hello from 'Hello';
+import Main from 'Main';
 
 ReactDOM.render(
-  <Hello message="coming soon" enthusiasmLevel={2} />,
+  <Main />,
   document.getElementById('root') as HTMLElement
 );
