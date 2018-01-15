@@ -107,7 +107,7 @@ class SampleChart extends React.Component<Props, State> {
           <option value={Period.MONTH}>Month</option>
           <option value={Period.YEAR}>Year</option>
         </select>
-        <div className="chartContainer">
+        <div className="chart-container">
           <canvas ref={(c) => this.canvas = c} width="300" height="200" />
         </div>
       </div>

@@ -15,6 +15,9 @@
 .env.test.local
 .env.production.local
 
+# ignore css files coming from sass code
+src/**/*.css
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

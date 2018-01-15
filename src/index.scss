@@ -1,0 +1,13 @@
+div {
+  &.content {
+    height: 300px;
+    margin: 0 auto;
+    width: 50%;
+  }
+
+  &.chart-container {
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+}
