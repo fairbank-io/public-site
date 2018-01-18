@@ -1,12 +1,27 @@
 import * as React from 'react';
-import { SampleChart } from 'components/SampleChart';
+import { Link, Route } from 'react-router-dom';
+import Wrapper from './Wrapper';
 
-export default class Main extends React.Component<{}, {}> {
+class Main extends React.Component<{}, {}> {
   public render(): JSX.Element {
     return (
       <div className="content">
-        <SampleChart asset="FAIR" label="FAIR price in USD" />
+        <ul>
+          <li>
+            <Link to="fair">FAIR</Link>
+          </li>
+          <li>
+            <Link to="btc">BTC</Link>
+          </li>
+          <li>
+            <Link to="ltc">LTC</Link>
+          </li>
+        </ul>
+        <Route path="*" component={Wrapper} />
       </div>
     );
   }
 }
+
+// Module exports
+export default Main;

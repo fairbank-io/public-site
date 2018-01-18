@@ -8,9 +8,12 @@ import 'index.css';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Main from 'Main';
 
 ReactDOM.render(
-  <Main />,
+  <Router >
+    <Main />
+  </Router >,
   document.getElementById('root') as HTMLElement
 );

@@ -10,14 +10,20 @@ enum Period {
   YEAR  = 'year'
 }
 
+enum Asset {
+  FAIR = 'FAIR',
+  BTC  = 'BTC',
+  LTC  = 'LTC'
+}
+
 interface Props {
-  readonly asset: string;
+  readonly asset: Asset;
   readonly label: string;
   readonly period?: Period;
 }
 
 interface State {
-  asset: string;
+  asset: Asset;
   data: Array<ChartPoint>;
   period: Period;
   currentPrice: number;
@@ -61,9 +67,9 @@ class SampleChart extends React.Component<Props, State> {
       scales: {
         yAxes: [{
           type: 'linear',
-          display: false,
+          display: true,
           ticks: {
-            beginAtZero: false,
+            beginAtZero: false
           }
         }],
         xAxes: [{
@@ -82,25 +88,33 @@ class SampleChart extends React.Component<Props, State> {
       period: this.props.period || Period.WEEK,
       data: []
     };
-    this.fetchChartData = this.fetchChartData.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
   componentDidMount() {
     this.chart = new Chart(this.canvas as HTMLCanvasElement, this.defaultChartOptions);
-    this.fetchCurrentPrice();
-    this.fetchChartData(this.state.period);
+    this.getCurrentPrice(this.state.asset);
+    this.getData(this.state.asset, this.state.period);
   }
 
   componentWillUnmount() {
     this.chart.destroy();
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.asset !== this.props.asset ) {
+      this.setState({asset: nextProps.asset});
+      this.getCurrentPrice(nextProps.asset);
+      this.getData(nextProps.asset, this.state.period);
+    }
+  }
+
   public render(): JSX.Element {
     return (
       <div>
-        <p>Price information: <b>{this.props.asset}</b></p>
+        <p>Price information: <b>{this.state.asset}</b></p>
         <p>Current price is: <b>${this.state.currentPrice} USD</b></p>
-        <select value={this.state.period} onChange={(e) => this.fetchChartData(e.target.value as Period)}>
+        <select value={this.state.period} onChange={(e) => this.getData(this.state.asset, e.target.value as Period)}>
           <option value={Period.HOUR}>Hour</option>
           <option value={Period.DAY}>Day</option>
           <option value={Period.WEEK}>Week</option>
@@ -114,10 +128,10 @@ class SampleChart extends React.Component<Props, State> {
     );
   }
 
-  private fetchChartData(p: Period) {
+  private getData(a: Asset, p: Period) {
     let url: string = '';
     let params: APIQuery = {
-      fsym: this.state.asset,
+      fsym: a,
       tsym: 'USD'
     };
     switch (p) {
@@ -173,10 +187,10 @@ class SampleChart extends React.Component<Props, State> {
       });
   }
 
-  private fetchCurrentPrice() {
+  private getCurrentPrice(asset: Asset) {
     axios.get(this.baseUrl + 'price', {
       params: {
-        fsym: this.props.asset,
+        fsym: asset,
         tsyms: 'USD'
       }
     }).then((r) => {
@@ -197,8 +211,9 @@ class SampleChart extends React.Component<Props, State> {
   }
 }
 
-// Export component class and available period values
+// Module export
 export {
   SampleChart,
-  Period
+  Period,
+  Asset
 };
