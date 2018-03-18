@@ -1,0 +1,311 @@
+.popper,
+.tooltip {
+  position: absolute;
+  background: #FFFFFF;
+  color: black;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 100; }
+  .popper.large,
+  .tooltip.large {
+    width: 340px; }
+  .popper .popper-arrow,
+  .popper .tooltip-arrow,
+  .tooltip .popper-arrow,
+  .tooltip .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 6px;
+    border-color: #FFFFFF; }
+  .popper[x-placement^="top"], .popper[x-placement^="top"],
+  .tooltip[x-placement^="top"],
+  .tooltip[x-placement^="top"] {
+    margin-bottom: 6px; }
+    .popper[x-placement^="top"] .popper-arrow,
+    .popper[x-placement^="top"] .tooltip-arrow, .popper[x-placement^="top"] .popper-arrow,
+    .popper[x-placement^="top"] .tooltip-arrow,
+    .tooltip[x-placement^="top"] .popper-arrow,
+    .tooltip[x-placement^="top"] .tooltip-arrow,
+    .tooltip[x-placement^="top"] .popper-arrow,
+    .tooltip[x-placement^="top"] .tooltip-arrow {
+      border-width: 6px 6px 0 6px;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      bottom: -6px;
+      left: calc(50% - $popper_arrow_size);
+      margin-top: 0;
+      margin-bottom: 0; }
+  .popper[x-placement^="bottom"], .popper[x-placement^="tbottomop"],
+  .tooltip[x-placement^="bottom"],
+  .tooltip[x-placement^="tbottomop"] {
+    margin-top: 6px; }
+    .popper[x-placement^="bottom"] .popper-arrow,
+    .popper[x-placement^="bottom"] .tooltip-arrow, .popper[x-placement^="tbottomop"] .popper-arrow,
+    .popper[x-placement^="tbottomop"] .tooltip-arrow,
+    .tooltip[x-placement^="bottom"] .popper-arrow,
+    .tooltip[x-placement^="bottom"] .tooltip-arrow,
+    .tooltip[x-placement^="tbottomop"] .popper-arrow,
+    .tooltip[x-placement^="tbottomop"] .tooltip-arrow {
+      border-width: 0 6px 6px 6px;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      top: -6px;
+      left: calc(50% - $popper_arrow_size);
+      margin-top: 0;
+      margin-bottom: 0; }
+  .popper[x-placement^="right"], .popper[x-placement^="right"],
+  .tooltip[x-placement^="right"],
+  .tooltip[x-placement^="right"] {
+    margin-left: 6px; }
+    .popper[x-placement^="right"] .popper-arrow,
+    .popper[x-placement^="right"] .tooltip-arrow, .popper[x-placement^="right"] .popper-arrow,
+    .popper[x-placement^="right"] .tooltip-arrow,
+    .tooltip[x-placement^="right"] .popper-arrow,
+    .tooltip[x-placement^="right"] .tooltip-arrow,
+    .tooltip[x-placement^="right"] .popper-arrow,
+    .tooltip[x-placement^="right"] .tooltip-arrow {
+      border-width: 6px 6px 6px 0;
+      border-left-color: transparent;
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      left: -6px;
+      top: calc(50% - $popper_arrow_size);
+      margin-left: 0;
+      margin-right: 0; }
+  .popper[x-placement^="left"], .popper[x-placement^="left"],
+  .tooltip[x-placement^="left"],
+  .tooltip[x-placement^="left"] {
+    margin-right: 6px; }
+    .popper[x-placement^="left"] .popper-arrow,
+    .popper[x-placement^="left"] .tooltip-arrow, .popper[x-placement^="left"] .popper-arrow,
+    .popper[x-placement^="left"] .tooltip-arrow,
+    .tooltip[x-placement^="left"] .popper-arrow,
+    .tooltip[x-placement^="left"] .tooltip-arrow,
+    .tooltip[x-placement^="left"] .popper-arrow,
+    .tooltip[x-placement^="left"] .tooltip-arrow {
+      border-width: 6px 0 6px 6px;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      right: -6px;
+      top: calc(50% - $popper_arrow_size);
+      margin-left: 0;
+      margin-right: 0; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+  body.home {
+    background-image: url("../images/bg_main@2x.png");
+    background-size: 125%;
+    background-repeat: no-repeat;
+    background-position: top center; }
+
+section.footer {
+  text-align: center;
+  background-color: #EEEEEE;
+  color: #BDBDBD;
+  font-size: .9em;
+  padding: 3rem 1.5rem;
+  margin-bottom: 20px; }
+
+section.content {
+  flex: 1;
+  margin-top: 10px; }
+
+section.home div.phone {
+  width: 100%;
+  height: 800px;
+  background-image: url("../images/phone@2x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+  margin-top: 40px; }
+  section.home div.phone div.sample-card {
+    width: 60%;
+    height: 260px;
+    position: absolute;
+    top: 40%;
+    right: 5%;
+    background-image: url("../images/card@2x.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center; }
+section.home div.desc a.logo {
+  width: 400px;
+  height: 60px;
+  display: block;
+  background-image: url("../images/logo@2x.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0 auto; }
+section.home div.desc h1 {
+  font-size: 2.4em;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center; }
+section.home div.desc p.hero {
+  color: #FFFFFF;
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 1.6em;
+  text-align: center;
+  margin: 40px 0; }
+section.home div.desc a.button {
+  border: none;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
+  color: #FFFFFF;
+  text-transform: uppercase;
+  font-size: 1.3em;
+  padding: 30px;
+  margin-right: 10px; }
+  section.home div.desc a.button.register {
+    background-color: #E53935; }
+  section.home div.desc a.button.login {
+    background-color: #64B5F6; }
+
+section.menu {
+  background-image: url("../images/header_pattern.png");
+  background-position: top center;
+  background-repeat: repeat-x;
+  padding: 2em 1.5em; }
+  section.menu a.logo {
+    width: 400px;
+    height: 60px;
+    display: block;
+    background-image: url("../images/logo@2x.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain; }
+  section.menu a.logout {
+    background: none;
+    border: 0;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: .9em; }
+    section.menu a.logout span.icon {
+      font-size: 1.2em; }
+  section.menu span.avatar {
+    display: block;
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 40px;
+    position: relative; }
+    section.menu span.avatar span.pic {
+      display: block;
+      width: 66px;
+      height: 66px;
+      border-radius: 40px;
+      margin: 2px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url("../images/avatar_morty.png"); }
+    section.menu span.avatar span.tag {
+      position: absolute;
+      color: #FFFFFF;
+      font-weight: 700;
+      border-radius: 12px;
+      top: -6px;
+      right: -6px; }
+      section.menu span.avatar span.tag.alert {
+        background-color: #E53935; }
+      section.menu span.avatar span.tag.warning {
+        background-color: #FBC02D; }
+      section.menu span.avatar span.tag.ok {
+        background-color: #8BC34A; }
+  section.menu div.user-menu li {
+    padding: 20px;
+    border-bottom: 1px solid #EEEEEE;
+    cursor: pointer; }
+    section.menu div.user-menu li:first-child {
+      border-radius: 4px 4px 0 0; }
+    section.menu div.user-menu li:last-child {
+      border-bottom: none;
+      border-radius: 0 0 4px 4px; }
+    section.menu div.user-menu li:hover {
+      background: #FAFAFA; }
+  section.menu div.user-menu div.media {
+    align-items: center; }
+    section.menu div.user-menu div.media div.media-left {
+      margin-right: 20px; }
+  section.menu div.user-menu span.icon {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: none;
+    box-shadow: none; }
+    section.menu div.user-menu span.icon.account {
+      background-image: url("../images/icon_account@2x.png"); }
+    section.menu div.user-menu span.icon.transactions {
+      background-image: url("../images/icon_transactions@2x.png"); }
+    section.menu div.user-menu span.icon.invites {
+      background-image: url("../images/icon_invites@2x.png"); }
+    section.menu div.user-menu span.icon.market {
+      background-image: url("../images/icon_market@2x.png"); }
+    section.menu div.user-menu span.icon.notifications {
+      background-image: url("../images/icon_notifications@2x.png"); }
+  section.menu div.user-menu p.title {
+    color: #7E57C2;
+    font-size: 1em;
+    text-transform: uppercase;
+    margin-bottom: 1.8em; }
+    section.menu div.user-menu p.title span.tag {
+      color: #FFFFFF;
+      font-weight: 700; }
+      section.menu div.user-menu p.title span.tag.alert {
+        background-color: #E53935; }
+      section.menu div.user-menu p.title span.tag.warning {
+        background-color: #FBC02D; }
+      section.menu div.user-menu p.title span.tag.ok {
+        background-color: #8BC34A; }
+  section.menu div.user-menu p.subtitle {
+    font-size: 0.9em;
+    color: #BDBDBD; }
+
+section.panel h1 {
+  color: #7E57C2; }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 768px) {
+  body.home {
+    background-size: 400%; }
+
+  section.home div.desc h1 {
+    display: none; }
+  section.home div.desc p.hero {
+    font-size: 1.1em; }
+  section.home div.desc div.phone {
+    margin-top: 0; }
+    section.home div.desc div.phone div.sample-card {
+      width: 80%; }
+  section.home div.desc a.button {
+    font-size: 1.3em;
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    padding: 16px 0;
+    height: auto;
+    box-shadow: none;
+    margin-bottom: 4px; }
+    section.home div.desc a.button.register {
+      background-color: rgba(0, 0, 0, 0.25); }
+    section.home div.desc a.button.login {
+      background-color: rgba(0, 0, 0, 0.25); } }
+
+/*# sourceMappingURL=fbank.css.map */

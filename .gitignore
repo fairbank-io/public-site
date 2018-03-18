@@ -10,6 +10,8 @@
 # misc
 .DS_Store
 .idea
+.code
+.sass-cache
 .env.local
 .env.development.local
 .env.test.local
