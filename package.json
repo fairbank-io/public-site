@@ -2,18 +2,6 @@
   "name": "fairbank-site",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "axios": "^0.17.1",
-    "chart.js": "^2.7.1",
-    "qrcode.react": "^0.7.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.2.2",
-    "react-router-redux": "^4.0.8",
-    "react-scripts-ts": "2.10.0",
-    "redux": "^3.7.2"
-  },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -24,6 +12,22 @@
     "test": "react-scripts-ts test --env=jsdom",
     "coverage": "react-scripts-ts test --env=jsdom --coverage",
     "eject": "react-scripts-ts eject"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "chart.js": "^2.7.1",
+    "immutable": "^3.8.2",
+    "popper.js": "^1.14.1",
+    "qrcode.react": "^0.7.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-popper": "^0.8.2",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "react-scripts-ts": "2.10.0",
+    "redux": "^3.7.2",
+    "tooltip.js": "^1.2.0"
   },
   "devDependencies": {
     "@types/chart.js": "^2.7.3",
