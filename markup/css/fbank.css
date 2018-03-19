@@ -109,6 +109,16 @@ body {
     background-repeat: no-repeat;
     background-position: top center; }
 
+span.tag {
+  color: #FFFFFF;
+  font-weight: 700; }
+  span.tag.alert {
+    background-color: #E53935; }
+  span.tag.warning {
+    background-color: #FBC02D; }
+  span.tag.ok {
+    background-color: #8BC34A; }
+
 section.footer {
   text-align: center;
   background-color: #EEEEEE;
@@ -168,7 +178,8 @@ section.home div.desc a.button {
   text-transform: uppercase;
   font-size: 1.3em;
   padding: 30px;
-  margin-right: 10px; }
+  margin-right: 10px;
+  width: 100%; }
   section.home div.desc a.button.register {
     background-color: #E53935; }
   section.home div.desc a.button.login {
@@ -216,17 +227,9 @@ section.menu {
       background-image: url("../images/avatar_morty.png"); }
     section.menu span.avatar span.tag {
       position: absolute;
-      color: #FFFFFF;
-      font-weight: 700;
       border-radius: 12px;
       top: -6px;
       right: -6px; }
-      section.menu span.avatar span.tag.alert {
-        background-color: #E53935; }
-      section.menu span.avatar span.tag.warning {
-        background-color: #FBC02D; }
-      section.menu span.avatar span.tag.ok {
-        background-color: #8BC34A; }
   section.menu div.user-menu li {
     padding: 20px;
     border-bottom: 1px solid #EEEEEE;
@@ -265,18 +268,11 @@ section.menu {
     font-size: 1em;
     text-transform: uppercase;
     margin-bottom: 1.8em; }
-    section.menu div.user-menu p.title span.tag {
-      color: #FFFFFF;
-      font-weight: 700; }
-      section.menu div.user-menu p.title span.tag.alert {
-        background-color: #E53935; }
-      section.menu div.user-menu p.title span.tag.warning {
-        background-color: #FBC02D; }
-      section.menu div.user-menu p.title span.tag.ok {
-        background-color: #8BC34A; }
   section.menu div.user-menu p.subtitle {
     font-size: 0.9em;
     color: #BDBDBD; }
+  section.menu div.mobile-menu {
+    display: none; }
 
 section.panel h1 {
   color: #7E57C2; }
@@ -284,28 +280,62 @@ section.panel h1 {
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 768px) {
   body.home {
-    background-size: 400%; }
+    background-size: 500%; }
 
+  section.footer {
+    font-size: .8em; }
+
+  section.home div.phone {
+    height: 600px; }
+    section.home div.phone div.sample-card {
+      width: 80%; }
+  section.home div.desc a.logo {
+    width: 300px; }
   section.home div.desc h1 {
     display: none; }
   section.home div.desc p.hero {
     font-size: 1.1em; }
-  section.home div.desc div.phone {
-    margin-top: 0; }
-    section.home div.desc div.phone div.sample-card {
-      width: 80%; }
   section.home div.desc a.button {
     font-size: 1.3em;
     display: block;
     width: 100%;
     margin-right: 0;
-    padding: 16px 0;
+    padding: 10px 0;
     height: auto;
     box-shadow: none;
     margin-bottom: 4px; }
     section.home div.desc a.button.register {
       background-color: rgba(0, 0, 0, 0.25); }
     section.home div.desc a.button.login {
+      background-color: rgba(0, 0, 0, 0.25); }
+
+  section.menu a.logo {
+    margin: 0 auto;
+    width: 300px; }
+  section.menu a.logout {
+    width: 100%;
+    font-size: 1em;
+    margin: 12px 0; }
+  section.menu div.level-right {
+    position: relative; }
+  section.menu span.avatar {
+    position: absolute;
+    left: calc(50% - 35px); }
+  section.menu div.mobile-menu {
+    margin-bottom: 20px;
+    display: block; }
+    section.menu div.mobile-menu a.button {
+      font-size: .9em;
+      display: block;
+      width: 100%;
+      margin-right: 0;
+      padding: 16px 0;
+      height: auto;
+      box-shadow: none;
+      margin-bottom: 4px;
+      color: #FFFFFF;
+      border: none;
+      text-transform: uppercase;
       background-color: rgba(0, 0, 0, 0.25); } }
 
 /*# sourceMappingURL=fbank.css.map */

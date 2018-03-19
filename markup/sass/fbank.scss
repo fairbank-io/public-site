@@ -38,6 +38,23 @@ body {
   }
 }
 
+span.tag {
+  color: $white;
+  font-weight: 700;
+
+  &.alert {
+    background-color: $red;
+  }
+
+  &.warning {
+    background-color: $yellow;
+  }
+
+  &.ok {
+    background-color: $green;
+  }
+}
+
 section.footer {
   text-align: center;
   background-color: $gray_two;
@@ -113,6 +130,7 @@ section.home {
       font-size: 1.3em;
       padding: 30px;
       margin-right: 10px;
+      width: 100%;
 
       &.register {
         background-color: $red;
@@ -178,23 +196,9 @@ section.menu {
 
     span.tag {
       position: absolute;
-      color: $white;
-      font-weight: 700;
       border-radius: 12px;
       top: -6px;
       right: -6px;
-
-      &.alert {
-        background-color: $red;
-      }
-
-      &.warning {
-        background-color: $yellow;
-      }
-
-      &.ok {
-        background-color: $green;
-      }
     }
   }
 
@@ -261,29 +265,16 @@ section.menu {
       font-size: 1em;
       text-transform: uppercase;
       margin-bottom: 1.8em;
-
-      span.tag {
-        color: $white;
-        font-weight: 700;
-
-        &.alert {
-          background-color: $red;
-        }
-  
-        &.warning {
-          background-color: $yellow;
-        }
-  
-        &.ok {
-          background-color: $green;
-        }
-      }
     }
 
     p.subtitle {
       font-size: 0.9em;
       color: $gray_three;
     }
+  }
+
+  div.mobile-menu {
+    display: none;
   }
 }
 
@@ -296,11 +287,27 @@ section.panel {
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 768px) {
   body.home {
-      background-size: 400%;
+    background-size: 500%;
+  }
+
+  section.footer {
+    font-size: .8em;
   }
 
   section.home {
+    div.phone {
+      height: 600px;
+
+      div.sample-card {
+        width: 80%;
+      }
+    }
+
     div.desc {
+      a.logo {
+        width: 300px;
+      }
+
       h1 {
         display: none;
       }
@@ -309,20 +316,12 @@ section.panel {
         font-size: 1.1em;
       }
 
-      div.phone {
-        margin-top: 0;
-
-        div.sample-card {
-          width: 80%;
-        }
-      }
-
       a.button {
         font-size: 1.3em;
         display: block;
         width: 100%;
         margin-right: 0;
-        padding: 16px 0;
+        padding: 10px 0;
         height: auto;
         box-shadow: none;
         margin-bottom: 4px;
@@ -334,6 +333,48 @@ section.panel {
         &.login {
           background-color: rgba(0, 0, 0, 0.25);
         }
+      }
+    }
+  }
+
+  section.menu {
+    a.logo {
+      margin: 0 auto;
+      width: 300px;
+    }
+
+    a.logout {
+      width: 100%;
+      font-size: 1em;
+      margin: 12px 0;
+    }
+
+    div.level-right {
+      position: relative;
+    }
+
+    span.avatar {
+      position: absolute;
+      left: calc(50% - 35px);
+    }
+
+    div.mobile-menu {
+      margin-bottom: 20px;
+      display: block;
+
+      a.button {
+        font-size: .9em;
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        padding: 16px 0;
+        height: auto;
+        box-shadow: none;
+        margin-bottom: 4px;
+        color: $white;
+        border: none;
+        text-transform: uppercase;
+        background-color: rgba(0, 0, 0, 0.25);
       }
     }
   }

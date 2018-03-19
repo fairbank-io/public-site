@@ -9,7 +9,11 @@ $('document').ready(function(){
   );
   
   $('section.menu span.avatar').click(function(e){
-    $('section.menu div.popper').toggle();
-    menu.update();
+    if( $(window).width() >= 700 ) {
+      $('section.menu div.popper').toggle();
+      menu.update();
+    } else {
+      $('section.menu div.mobile-menu').toggle();
+    }
   });
 });
