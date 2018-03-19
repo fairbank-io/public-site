@@ -1,12 +1,12 @@
 .popper,
 .tooltip {
-  position: absolute;
-  background: #FFFFFF;
-  color: black;
-  width: auto;
+  background: #fff;
   border-radius: 4px;
-  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
+  color: #111;
+  position: absolute;
   text-align: center;
+  width: auto;
   z-index: 100; }
   .popper.large,
   .tooltip.large {
@@ -15,12 +15,11 @@
   .popper .tooltip-arrow,
   .tooltip .popper-arrow,
   .tooltip .tooltip-arrow {
-    width: 0;
+    border: solid #fff;
     height: 0;
-    border-style: solid;
-    position: absolute;
     margin: 6px;
-    border-color: #FFFFFF; }
+    position: absolute;
+    width: 0; }
   .popper[x-placement^="top"], .popper[x-placement^="top"],
   .tooltip[x-placement^="top"],
   .tooltip[x-placement^="top"] {
@@ -32,14 +31,14 @@
     .tooltip[x-placement^="top"] .tooltip-arrow,
     .tooltip[x-placement^="top"] .popper-arrow,
     .tooltip[x-placement^="top"] .tooltip-arrow {
-      border-width: 6px 6px 0 6px;
+      border-bottom-color: transparent;
       border-left-color: transparent;
       border-right-color: transparent;
-      border-bottom-color: transparent;
+      border-width: 6px 6px 0 6px;
       bottom: -6px;
-      left: calc(50% - $popper_arrow_size);
-      margin-top: 0;
-      margin-bottom: 0; }
+      left: calc(50% - 6px);
+      margin-bottom: 0;
+      margin-top: 0; }
   .popper[x-placement^="bottom"], .popper[x-placement^="tbottomop"],
   .tooltip[x-placement^="bottom"],
   .tooltip[x-placement^="tbottomop"] {
@@ -51,14 +50,14 @@
     .tooltip[x-placement^="bottom"] .tooltip-arrow,
     .tooltip[x-placement^="tbottomop"] .popper-arrow,
     .tooltip[x-placement^="tbottomop"] .tooltip-arrow {
-      border-width: 0 6px 6px 6px;
       border-left-color: transparent;
       border-right-color: transparent;
       border-top-color: transparent;
-      top: -6px;
-      left: calc(50% - $popper_arrow_size);
+      border-width: 0 6px 6px 6px;
+      left: calc(50% - 6px);
+      margin-bottom: 0;
       margin-top: 0;
-      margin-bottom: 0; }
+      top: -6px; }
   .popper[x-placement^="right"], .popper[x-placement^="right"],
   .tooltip[x-placement^="right"],
   .tooltip[x-placement^="right"] {
@@ -70,14 +69,14 @@
     .tooltip[x-placement^="right"] .tooltip-arrow,
     .tooltip[x-placement^="right"] .popper-arrow,
     .tooltip[x-placement^="right"] .tooltip-arrow {
-      border-width: 6px 6px 6px 0;
+      border-bottom-color: transparent;
       border-left-color: transparent;
       border-top-color: transparent;
-      border-bottom-color: transparent;
+      border-width: 6px 6px 6px 0;
       left: -6px;
-      top: calc(50% - $popper_arrow_size);
       margin-left: 0;
-      margin-right: 0; }
+      margin-right: 0;
+      top: calc(50% - 6px); }
   .popper[x-placement^="left"], .popper[x-placement^="left"],
   .tooltip[x-placement^="left"],
   .tooltip[x-placement^="left"] {
@@ -89,170 +88,154 @@
     .tooltip[x-placement^="left"] .tooltip-arrow,
     .tooltip[x-placement^="left"] .popper-arrow,
     .tooltip[x-placement^="left"] .tooltip-arrow {
-      border-width: 6px 0 6px 6px;
-      border-top-color: transparent;
-      border-right-color: transparent;
       border-bottom-color: transparent;
-      right: -6px;
-      top: calc(50% - $popper_arrow_size);
+      border-right-color: transparent;
+      border-top-color: transparent;
+      border-width: 6px 0 6px 6px;
       margin-left: 0;
-      margin-right: 0; }
+      margin-right: 0;
+      right: -6px;
+      top: calc(50% - 6px); }
 
 body {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  min-height: 100vh; }
   body.home {
-    background-image: url("../images/bg_main@2x.png");
-    background-size: 125%;
-    background-repeat: no-repeat;
-    background-position: top center; }
+    background: url("../images/bg_main@2x.png") no-repeat top center;
+    background-size: 125%; }
 
 span.tag {
-  color: #FFFFFF;
+  color: #fff;
   font-weight: 700; }
   span.tag.alert {
-    background-color: #E53935; }
+    background-color: #e53935; }
   span.tag.warning {
-    background-color: #FBC02D; }
+    background-color: #fbc02d; }
   span.tag.ok {
-    background-color: #8BC34A; }
+    background-color: #8bc34a; }
 
 section.footer {
-  text-align: center;
-  background-color: #EEEEEE;
-  color: #BDBDBD;
+  background-color: #eee;
+  color: #bdbdbd;
   font-size: .9em;
+  margin-bottom: 20px;
   padding: 3rem 1.5rem;
-  margin-bottom: 20px; }
+  text-align: center; }
 
 section.content {
   flex: 1;
   margin-top: 10px; }
 
 section.home div.phone {
-  width: 100%;
-  height: 800px;
-  background-image: url("../images/phone@2x.png");
+  background: url("../images/phone@2x.png") no-repeat center center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
+  height: 800px;
+  margin-top: 40px;
   position: relative;
-  margin-top: 40px; }
+  width: 100%; }
   section.home div.phone div.sample-card {
-    width: 60%;
+    background: url("../images/card@2x.png") no-repeat center center;
+    background-size: contain;
     height: 260px;
     position: absolute;
-    top: 40%;
     right: 5%;
-    background-image: url("../images/card@2x.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center; }
+    top: 40%;
+    width: 60%; }
 section.home div.desc a.logo {
-  width: 400px;
-  height: 60px;
-  display: block;
-  background-image: url("../images/logo@2x.png");
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: url("../images/logo@2x.png") no-repeat center center;
   background-size: contain;
-  margin: 0 auto; }
+  display: block;
+  height: 60px;
+  margin: 0 auto;
+  width: 400px; }
 section.home div.desc h1 {
+  color: #fff;
   font-size: 2.4em;
   font-weight: 700;
-  color: #FFFFFF;
   text-align: center; }
 section.home div.desc p.hero {
-  color: #FFFFFF;
+  color: #fff;
   font-size: 1.3em;
   font-weight: 300;
   line-height: 1.6em;
-  text-align: center;
-  margin: 40px 0; }
+  margin: 40px 0;
+  text-align: center; }
 section.home div.desc a.button {
-  border: none;
-  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
-  color: #FFFFFF;
-  text-transform: uppercase;
+  border: 0;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
+  color: #fff;
   font-size: 1.3em;
-  padding: 30px;
   margin-right: 10px;
+  padding: 30px;
+  text-transform: uppercase;
   width: 100%; }
   section.home div.desc a.button.register {
-    background-color: #E53935; }
+    background-color: #e53935; }
   section.home div.desc a.button.login {
-    background-color: #64B5F6; }
+    background-color: #64b5f6; }
 
 section.menu {
-  background-image: url("../images/header_pattern.png");
-  background-position: top center;
-  background-repeat: repeat-x;
+  background: url("../images/header_pattern.png") repeat-x top center;
   padding: 2em 1.5em; }
   section.menu a.logo {
-    width: 400px;
-    height: 60px;
+    background: url("../images/logo@2x.png") no-repeat center center;
+    background-size: contain;
     display: block;
-    background-image: url("../images/logo@2x.png");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: contain; }
+    height: 60px;
+    width: 400px; }
   section.menu a.logout {
     background: none;
     border: 0;
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font-size: .9em; }
+    color: #fff;
+    font-size: .9em;
+    text-transform: uppercase; }
     section.menu a.logout span.icon {
       font-size: 1.2em; }
   section.menu span.avatar {
-    display: block;
-    cursor: pointer;
-    width: 70px;
-    height: 70px;
-    background: #FFFFFF;
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
+    background: #fff;
     border-radius: 40px;
-    position: relative; }
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: block;
+    height: 70px;
+    position: relative;
+    width: 70px; }
     section.menu span.avatar span.pic {
-      display: block;
-      width: 66px;
-      height: 66px;
-      border-radius: 40px;
-      margin: 2px;
-      background-position: center center;
-      background-repeat: no-repeat;
+      background: url("../images/avatar_morty.png") no-repeat center center;
       background-size: contain;
-      background-image: url("../images/avatar_morty.png"); }
+      border-radius: 40px;
+      display: block;
+      height: 66px;
+      margin: 2px;
+      width: 66px; }
     section.menu span.avatar span.tag {
-      position: absolute;
       border-radius: 12px;
-      top: -6px;
-      right: -6px; }
+      position: absolute;
+      right: -6px;
+      top: -6px; }
   section.menu div.user-menu li {
-    padding: 20px;
-    border-bottom: 1px solid #EEEEEE;
-    cursor: pointer; }
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    padding: 20px; }
     section.menu div.user-menu li:first-child {
       border-radius: 4px 4px 0 0; }
     section.menu div.user-menu li:last-child {
-      border-bottom: none;
+      border-bottom-style: none;
       border-radius: 0 0 4px 4px; }
     section.menu div.user-menu li:hover {
-      background: #FAFAFA; }
+      background: #fafafa; }
   section.menu div.user-menu div.media {
     align-items: center; }
     section.menu div.user-menu div.media div.media-left {
       margin-right: 20px; }
   section.menu div.user-menu span.icon {
-    width: 40px;
-    height: 40px;
+    background: none no-repeat center center;
     background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-color: none;
-    box-shadow: none; }
+    box-shadow: none;
+    height: 40px;
+    width: 40px; }
     section.menu div.user-menu span.icon.account {
       background-image: url("../images/icon_account@2x.png"); }
     section.menu div.user-menu span.icon.transactions {
@@ -264,20 +247,19 @@ section.menu {
     section.menu div.user-menu span.icon.notifications {
       background-image: url("../images/icon_notifications@2x.png"); }
   section.menu div.user-menu p.title {
-    color: #7E57C2;
+    color: #7e57c2;
     font-size: 1em;
-    text-transform: uppercase;
-    margin-bottom: 1.8em; }
+    margin-bottom: 1.8em;
+    text-transform: uppercase; }
   section.menu div.user-menu p.subtitle {
-    font-size: 0.9em;
-    color: #BDBDBD; }
+    color: #bdbdbd;
+    font-size: .9em; }
   section.menu div.mobile-menu {
     display: none; }
 
 section.panel h1 {
-  color: #7E57C2; }
+  color: #7e57c2; }
 
-/* Small devices (landscape phones, 576px and up) */
 @media (max-width: 768px) {
   body.home {
     background-size: 500%; }
@@ -296,14 +278,14 @@ section.panel h1 {
   section.home div.desc p.hero {
     font-size: 1.1em; }
   section.home div.desc a.button {
-    font-size: 1.3em;
+    box-shadow: none;
     display: block;
-    width: 100%;
+    font-size: 1.3em;
+    height: auto;
+    margin-bottom: 4px;
     margin-right: 0;
     padding: 10px 0;
-    height: auto;
-    box-shadow: none;
-    margin-bottom: 4px; }
+    width: 100%; }
     section.home div.desc a.button.register {
       background-color: rgba(0, 0, 0, 0.25); }
     section.home div.desc a.button.login {
@@ -313,29 +295,29 @@ section.panel h1 {
     margin: 0 auto;
     width: 300px; }
   section.menu a.logout {
-    width: 100%;
     font-size: 1em;
-    margin: 12px 0; }
+    margin: 12px 0;
+    width: 100%; }
   section.menu div.level-right {
     position: relative; }
   section.menu span.avatar {
-    position: absolute;
-    left: calc(50% - 35px); }
+    left: calc(50% - 35px);
+    position: absolute; }
   section.menu div.mobile-menu {
-    margin-bottom: 20px;
-    display: block; }
+    display: block;
+    margin-bottom: 20px; }
     section.menu div.mobile-menu a.button {
-      font-size: .9em;
+      background-color: rgba(0, 0, 0, 0.25);
+      border: 0;
+      box-shadow: none;
+      color: #fff;
       display: block;
-      width: 100%;
+      font-size: .9em;
+      height: auto;
+      margin-bottom: 4px;
       margin-right: 0;
       padding: 16px 0;
-      height: auto;
-      box-shadow: none;
-      margin-bottom: 4px;
-      color: #FFFFFF;
-      border: none;
       text-transform: uppercase;
-      background-color: rgba(0, 0, 0, 0.25); } }
+      width: 100%; } }
 
 /*# sourceMappingURL=fbank.css.map */

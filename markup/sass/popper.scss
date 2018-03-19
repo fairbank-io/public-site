@@ -1,13 +1,15 @@
+@import 'variables';
+
 .popper,
 .tooltip {
-  position: absolute;
-  background: $popper_color;
-  color: black;
-  width: auto;
-  border-radius: $popper_radius;
+  background: $popper-color;
+  border-radius: $popper-radius;
   box-shadow: $shadow;
+  color: $black;
+  position: absolute;
   text-align: center;
-  z-index: $level_two;
+  width: auto;
+  z-index: $level-two;
 
   &.large {
     width: 340px;
@@ -15,75 +17,78 @@
 
   .popper-arrow,
   .tooltip-arrow {
-    width: 0;
+    border: solid $popper-color;
     height: 0;
-    border-style: solid;
+    margin: $popper-arrow-size;
     position: absolute;
-    margin: $popper_arrow_size;
-    border-color: $popper_color;
+    width: 0;
   }
 
   &[x-placement^="top"],
   &[x-placement^="top"] {
-    margin-bottom: $popper_arrow_size;
+    margin-bottom: $popper-arrow-size;
+
     .popper-arrow,
     .tooltip-arrow {
-      border-width: $popper_arrow_size $popper_arrow_size 0 $popper_arrow_size;
+      border-bottom-color: transparent;
       border-left-color: transparent;
       border-right-color: transparent;
-      border-bottom-color: transparent;
-      bottom: -$popper_arrow_size;
-      left: calc(50% - $popper_arrow_size);
-      margin-top: 0;
+      border-width: $popper-arrow-size $popper-arrow-size 0 $popper-arrow-size;
+      bottom: -$popper-arrow-size;
+      left: calc(50% - #{$popper-arrow-size});
       margin-bottom: 0;
+      margin-top: 0;
     }
   }
 
   &[x-placement^="bottom"],
   &[x-placement^="tbottomop"] {
-    margin-top: $popper_arrow_size;
+    margin-top: $popper-arrow-size;
+
     .popper-arrow,
     .tooltip-arrow {
-      border-width: 0 $popper_arrow_size $popper_arrow_size $popper_arrow_size;
       border-left-color: transparent;
       border-right-color: transparent;
       border-top-color: transparent;
-      top: -$popper_arrow_size;
-      left: calc(50% - $popper_arrow_size);
-      margin-top: 0;
+      border-width: 0 $popper-arrow-size $popper-arrow-size $popper-arrow-size;
+      left: calc(50% - #{$popper-arrow-size});
       margin-bottom: 0;
+      margin-top: 0;
+      top: -$popper_arrow_size;
     }
   }
 
   &[x-placement^="right"],
   &[x-placement^="right"] {
-    margin-left: $popper_arrow_size;
+    margin-left: $popper-arrow-size;
+
     .popper-arrow,
     .tooltip-arrow {
-      border-width: $popper_arrow_size $popper_arrow_size $popper_arrow_size 0;
+      border-bottom-color: transparent;
       border-left-color: transparent;
       border-top-color: transparent;
-      border-bottom-color: transparent;
-      left: -$popper_arrow_size;
-      top: calc(50% - $popper_arrow_size);
+      border-width: $popper-arrow-size $popper-arrow-size $popper-arrow-size 0;
+      left: -$popper-arrow-size;
       margin-left: 0;
       margin-right: 0;
+      top: calc(50% - #{$popper-arrow-size});
     }
   }
 
   &[x-placement^="left"],
   &[x-placement^="left"] {
-    margin-right: $popper_arrow_size;
+    margin-right: $popper-arrow-size;
+
     .popper-arrow,
     .tooltip-arrow {
-      border-width: $popper_arrow_size 0 $popper_arrow_size $popper_arrow_size;
-      border-top-color: transparent;
-      border-right-color: transparent;
       border-bottom-color: transparent;
-      right: -$popper_arrow_size;
-      top: calc(50% - $popper_arrow_size);
+      border-right-color: transparent;
+      border-top-color: transparent;
+      border-width: $popper-arrow-size 0 $popper-arrow-size $popper-arrow-size;
       margin-left: 0;
       margin-right: 0;
+      right: -$popper-arrow-size;
+      top: calc(50% - #{$popper-arrow-size});
     }
   }
 }

@@ -1,40 +1,15 @@
-// General values
-$red:        #E53935;
-$blue:       #64B5F6;
-$green:      #8BC34A;
-$purple:     #7E57C2;
-$yellow:     #FBC02D;
-$orange:     #FFA726;
-$white:      #FFFFFF;
-$gray_one:   #FAFAFA;
-$gray_two:   #EEEEEE;
-$gray_three: #BDBDBD;
-$shadow:     0px 1px 4px 0px rgba(0, 0, 0, 0.5);
-
-// Index levels
-$level_one:   10;
-$level_two:   100;
-$level_three: 1000;
-$level_four:  10000;
-
-// Poper variables
-$popper_color:      $white;
-$popper_radius:     4px;
-$popper_arrow_size: 6px;
-
+@import 'variables';
 @import 'popper';
 
 body {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  min-height: 100vh;
 
   &.home {
-    background-image: url('../images/bg_main@2x.png');
+    background: url('../images/bg_main@2x.png') no-repeat top center;
     background-size: 125%;
-    background-repeat: no-repeat;
-    background-position: top center;
   }
 }
 
@@ -56,12 +31,12 @@ span.tag {
 }
 
 section.footer {
-  text-align: center;
-  background-color: $gray_two;
-  color: $gray_three;
+  background-color: $gray-two;
+  color: $gray-three;
   font-size: .9em;
-  padding: 3rem 1.5rem;
   margin-bottom: 20px;
+  padding: 3rem 1.5rem;
+  text-align: center;
 }
 
 section.content {
@@ -72,70 +47,64 @@ section.content {
 // Home screen
 section.home {
   div.phone {
-    width: 100%;
-    height: 800px;
-    background-image: url('../images/phone@2x.png');
+    background: url('../images/phone@2x.png') no-repeat center center;
     background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
+    height: 800px;
     margin-top: 40px;
+    position: relative;
+    width: 100%;
 
     div.sample-card {
-      width: 60%;
+      background: url('../images/card@2x.png') no-repeat center center;
+      background-size: contain;
       height: 260px;
       position: absolute;
-      top: 40%;
       right: 5%;
-      background-image: url('../images/card@2x.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center center;
+      top: 40%;
+      width: 60%;
     }
   }
-  
+
   div.desc {
     a.logo {
-      width: 400px;
-      height: 60px;
-      display: block;
-      background-image: url('../images/logo@2x.png');
-      background-position: center center;
-      background-repeat: no-repeat;
+      background: url('../images/logo@2x.png') no-repeat center center;
       background-size: contain;
+      display: block;
+      height: 60px;
       margin: 0 auto;
+      width: 400px;
     }
 
     h1 {
+      color: $white;
       font-size: 2.4em;
       font-weight: 700;
-      color: $white;
       text-align: center;
     }
-    
+
     p.hero {
       color: $white;
       font-size: 1.3em;
       font-weight: 300;
       line-height: 1.6em;
-      text-align: center;
       margin: 40px 0;
+      text-align: center;
     }
-    
+
     a.button {
-      border: none;
+      border: 0;
       box-shadow: $shadow;
       color: $white;
-      text-transform: uppercase;
       font-size: 1.3em;
-      padding: 30px;
       margin-right: 10px;
+      padding: 30px;
+      text-transform: uppercase;
       width: 100%;
 
       &.register {
         background-color: $red;
       }
-      
+
       &.login {
         background-color: $blue;
       }
@@ -145,27 +114,23 @@ section.home {
 
 // Main menu
 section.menu {
-  background-image: url('../images/header_pattern.png');
-  background-position: top center;
-  background-repeat: repeat-x;
+  background: url('../images/header_pattern.png') repeat-x top center;
   padding: 2em 1.5em;
 
   a.logo {
-    width: 400px;
-    height: 60px;
-    display: block;
-    background-image: url('../images/logo@2x.png');
-    background-position: center center;
-    background-repeat: no-repeat;
+    background: url('../images/logo@2x.png') no-repeat center center;
     background-size: contain;
+    display: block;
+    height: 60px;
+    width: 400px;
   }
 
   a.logout {
     background: none;
     border: 0;
     color: $white;
-    text-transform: uppercase;
     font-size: .9em;
+    text-transform: uppercase;
 
     span.icon {
       font-size: 1.2em;
@@ -173,52 +138,50 @@ section.menu {
   }
 
   span.avatar {
-    display: block;
-    cursor: pointer;
-    width: 70px;
-    height: 70px;
     background: $white;
-    box-shadow: $shadow;
     border-radius: 40px;
+    box-shadow: $shadow;
+    cursor: pointer;
+    display: block;
+    height: 70px;
     position: relative;
+    width: 70px;
 
     span.pic {
-      display: block;
-      width: 66px;
-      height: 66px;
-      border-radius: 40px;
-      margin: 2px;
-      background-position: center center;
-      background-repeat: no-repeat;
+      background: url('../images/avatar_morty.png') no-repeat center center;
       background-size: contain;
-      background-image: url('../images/avatar_morty.png');
+      border-radius: 40px;
+      display: block;
+      height: 66px;
+      margin: 2px;
+      width: 66px;
     }
 
     span.tag {
-      position: absolute;
       border-radius: 12px;
-      top: -6px;
+      position: absolute;
       right: -6px;
+      top: -6px;
     }
   }
 
   div.user-menu {
     li {
-      padding: 20px;
-      border-bottom: 1px solid $gray_two;
+      border-bottom: 1px solid $gray-two;
       cursor: pointer;
+      padding: 20px;
 
       &:first-child {
-        border-radius: $popper_radius $popper_radius 0 0 ;
+        border-radius: $popper-radius $popper-radius 0 0;
       }
 
       &:last-child {
-        border-bottom: none;
-        border-radius: 0 0 $popper_radius $popper_radius;
+        border-bottom-style: none;
+        border-radius: 0 0 $popper-radius $popper-radius;
       }
 
       &:hover {
-        background: $gray_one;
+        background: $gray-one;
       }
     }
 
@@ -231,13 +194,11 @@ section.menu {
     }
 
     span.icon {
-      width: 40px;
-      height: 40px;
+      background: none no-repeat center center;
       background-size: contain;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-color: none;
       box-shadow: none;
+      height: 40px;
+      width: 40px;
 
       &.account {
         background-image: url('../images/icon_account@2x.png');
@@ -263,13 +224,13 @@ section.menu {
     p.title {
       color: $purple;
       font-size: 1em;
-      text-transform: uppercase;
       margin-bottom: 1.8em;
+      text-transform: uppercase;
     }
 
     p.subtitle {
-      font-size: 0.9em;
-      color: $gray_three;
+      color: $gray-three;
+      font-size: .9em;
     }
   }
 
@@ -284,7 +245,7 @@ section.panel {
   }
 }
 
-/* Small devices (landscape phones, 576px and up) */
+// Small devices (landscape phones, 576px and up)
 @media (max-width: 768px) {
   body.home {
     background-size: 500%;
@@ -311,27 +272,27 @@ section.panel {
       h1 {
         display: none;
       }
-  
+
       p.hero {
         font-size: 1.1em;
       }
 
       a.button {
-        font-size: 1.3em;
+        box-shadow: none;
         display: block;
-        width: 100%;
+        font-size: 1.3em;
+        height: auto;
+        margin-bottom: 4px;
         margin-right: 0;
         padding: 10px 0;
-        height: auto;
-        box-shadow: none;
-        margin-bottom: 4px;
+        width: 100%;
 
         &.register {
-          background-color: rgba(0, 0, 0, 0.25);
+          background-color: $black-shade-25;
         }
-        
+
         &.login {
-          background-color: rgba(0, 0, 0, 0.25);
+          background-color: $black-shade-25;
         }
       }
     }
@@ -344,9 +305,9 @@ section.panel {
     }
 
     a.logout {
-      width: 100%;
       font-size: 1em;
       margin: 12px 0;
+      width: 100%;
     }
 
     div.level-right {
@@ -354,27 +315,27 @@ section.panel {
     }
 
     span.avatar {
-      position: absolute;
       left: calc(50% - 35px);
+      position: absolute;
     }
 
     div.mobile-menu {
-      margin-bottom: 20px;
       display: block;
+      margin-bottom: 20px;
 
       a.button {
-        font-size: .9em;
+        background-color: $black-shade-25;
+        border: 0;
+        box-shadow: none;
+        color: $white;
         display: block;
-        width: 100%;
+        font-size: .9em;
+        height: auto;
+        margin-bottom: 4px;
         margin-right: 0;
         padding: 16px 0;
-        height: auto;
-        box-shadow: none;
-        margin-bottom: 4px;
-        color: $white;
-        border: none;
         text-transform: uppercase;
-        background-color: rgba(0, 0, 0, 0.25);
+        width: 100%;
       }
     }
   }

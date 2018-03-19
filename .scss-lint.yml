@@ -1,0 +1,12 @@
+linters:
+  QualifyingElement:
+    enabled: true
+    allow_element_with_attribute: false
+    allow_element_with_class: true
+    allow_element_with_id: false
+  NestingDepth:
+    enabled: true
+    max_depth: 4
+  SelectorDepth:
+    enabled: true
+    max_depth: 4
