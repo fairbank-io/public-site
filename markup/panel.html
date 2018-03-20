@@ -7,12 +7,11 @@
     <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="stylesheet" href="css/bulma.min.css">
     <link rel="stylesheet" href="css/fbank.css">
     <script defer src="js/fontawesome.js"></script>
+    <script defer src="js/jquery.min.js"></script>
     <script defer src="js/popper.min.js"></script>
-    <script defer src="js/tooltip.min.js"></script>
-    <script defer src="js/zepto.min.js"></script>
+    <script defer src="js/bootstrap.min.js"></script>
     <script defer src="js/fbank.js"></script>
     <title>FairBank - Servicios Financieros Digitales</title>
   </head>
@@ -20,100 +19,95 @@
     <!-- Header -->
     <section class="section menu">
       <div class="container">
-        <div class="columns">
-          <div class="column">
-            <div class="level">
-              <div class="level-left">
-                <a href="#" class="logo"></a>
-              </div>
-              <div class="level-right">
-                <a href="#" class="button logout">
-                  <span class="icon">
-                    <i class="fas fa-sign-out-alt"></i>
-                  </span>
-                  <span>Cerrar Sesión</span>
-                </a>
-                <div class="mobile-menu">
-                  <ul>
-                    <li>
-                      <a href="#" class="button is-large">Mi Cuenta</a>
-                    </li>
-                    <li>
-                      <a href="#" class="button is-large">Transacciones</a>
-                    </li>
-                    <li>
-                      <a href="#" class="button is-large">Invitaciones</a>
-                    </li>
-                    <li>
-                      <a href="#" class="button is-large">Notificaciones <span class="tag alert">10</span></a>
-                    </li>
-                  </ul>
-                </div>
-                <span class="avatar">
-                  <span class="pic"></span>
-                  <span class="tag alert">1</span>
-                </span>
-                <div class="user-menu popper large">
-                  <ul>
-                    <li>
-                      <div class="media">
-                        <div class="media-left">
-                          <span class="icon account"></span>
-                        </div>
-                        <div class="media-content">
-                          <p class="title">Mi Cuenta</p>
-                          <p class="subtitle">Consulta y actualiza tu información</p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="media">
-                        <div class="media-left">
-                          <span class="icon transactions"></span>
-                        </div>
-                        <div class="media-content">
-                          <p class="title">Transacciones</p>
-                          <p class="subtitle">Realiza transacciones nuevas y consulta la información relacionada</p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="media">
-                        <div class="media-left">
-                          <span class="icon invites"></span>
-                        </div>
-                        <div class="media-content">
-                          <p class="title">Invitaciones</p>
-                          <p class="subtitle">Invita a tus amigos y recibe importantes beneficios</p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="media">
-                        <div class="media-left">
-                          <span class="icon market"></span>
-                        </div>
-                        <div class="media-content">
-                          <p class="title">Mercado</p>
-                          <p class="subtitle">Mantente al dia con los últimos movimientos del mercado</p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="media">
-                        <div class="media-left">
-                          <span class="icon notifications"></span>
-                        </div>
-                        <div class="media-content">
-                          <p class="title">Notificaciones <span class="tag alert">10</span></p>
-                          <p class="subtitle">Consulta eventos importantes relacionados con tu cuenta</p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <div class="popper-arrow" x-arrow=""></div>
-                </div>
-              </div>
+        <div class="row">
+          <div class="col-md-6">
+            <a href="#" class="logo"></a>
+          </div>
+          <div class="col-md-6">
+            <span class="avatar">
+              <span class="badge badge-alert">10</span>
+            </span>
+            <a href="#" class="button logout">
+              <span class="icon">
+                <i class="fas fa-sign-out-alt"></i>
+              </span>
+              <span>Cerrar Sesión</span>
+            </a>
+            <div class="mobile-menu">
+              <ul>
+                <li>
+                  <button class="btn">Mi Cuenta</button>
+                </li>
+                <li>
+                  <button class="btn">Transacciones</button>
+                </li>
+                <li>
+                  <button class="btn">Inivitaciones</button>
+                </li>
+                <li>
+                  <button class="btn">Notificaciones <span class="badge badge-alert">10</span></button>
+                </li>
+              </ul>
+            </div>
+            <div class="desktop-menu popper large">
+              <ul>
+                <li>
+                  <div class="media">
+                    <div class="media-left">
+                      <span class="icon account"></span>
+                    </div>
+                    <div class="media-content">
+                      <p class="title">Mi Cuenta</p>
+                      <p class="subtitle">Consulta y actualiza tu información</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media">
+                    <div class="media-left">
+                      <span class="icon transactions"></span>
+                    </div>
+                    <div class="media-content">
+                      <p class="title">Transacciones</p>
+                      <p class="subtitle">Realiza transacciones nuevas y consulta la información relacionada</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media">
+                    <div class="media-left">
+                      <span class="icon invites"></span>
+                    </div>
+                    <div class="media-content">
+                      <p class="title">Invitaciones</p>
+                      <p class="subtitle">Invita a tus amigos y recibe importantes beneficios</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media">
+                    <div class="media-left">
+                      <span class="icon market"></span>
+                    </div>
+                    <div class="media-content">
+                      <p class="title">Mercado</p>
+                      <p class="subtitle">Mantente al dia con los últimos movimientos del mercado</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media">
+                    <div class="media-left">
+                      <span class="icon notifications"></span>
+                    </div>
+                    <div class="media-content">
+                      <p class="title">Notificaciones <span class="badge badge-alert">10</span></p>
+                      <p class="subtitle">Consulta eventos importantes relacionados con tu cuenta</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="popper-arrow" x-arrow=""></div>
             </div>
           </div>
         </div>
@@ -123,8 +117,8 @@
     <!-- Content -->
     <section class="section content panel">
       <div class="container">
-        <div class="columns">
-          <div class="column is-10 is-offset-1">
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
             <h1>Mi Cuenta</h1>
             <p>...</p>
           </div>
@@ -135,8 +129,8 @@
     <!-- Footer -->
     <section class="section footer">
       <div class="container">
-        <div class="columns">
-          <div class="column is-8 is-offset-2">
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
             <p>Copyright (c) 2018 FairBank LLC. La información desplegada en este sitio puede ser modificada o retirada a
               discreción de la empresa. Cualquier despliegue de marcas comerciales es de carácter ilustrativo y sujeto a
               las licencias aplicables. Favor de contactarnos en info@fairbank.io para mayores informes o aclaraciones.</p>

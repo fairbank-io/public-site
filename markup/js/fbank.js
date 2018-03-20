@@ -1,19 +1,18 @@
 $('document').ready(function(){
-  $('section.menu div.popper').toggle();
-  var menu = new Popper(
+  let menu = new Popper(
     document.querySelector('section.menu span.avatar'),
-    document.querySelector('section.menu div.popper'),
+    document.querySelector('section.menu div.desktop-menu'),
     {
       placement: 'bottom'
     }
   );
-  
-  $('section.menu span.avatar').click(function(e){
-    if( $(window).width() >= 700 ) {
-      $('section.menu div.popper').toggle();
-      menu.update();
+
+  $('section.menu span.avatar').on( 'click', function() {
+    if( $(window).width() <= 768 ) {
+      $('section.menu div.mobile-menu').slideToggle(500);
     } else {
-      $('section.menu div.mobile-menu').toggle();
+      menu.update();
+      $('section.menu div.desktop-menu').fadeToggle(200);
     }
   });
 });

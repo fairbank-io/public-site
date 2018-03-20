@@ -1,55 +1,70 @@
+// Dependencies
 @import 'variables';
 @import 'popper';
+
+// Base framework
+@import 'bootstrap-4.0.0/bootstrap';
 
 body {
   display: flex;
   flex-direction: column;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 100;
   min-height: 100vh;
 
   &.home {
     background: url('../images/bg_main@2x.png') no-repeat top center;
-    background-size: 125%;
+    background-size: 340%;
   }
 }
 
-span.tag {
+span.badge {
   color: $white;
   font-weight: 700;
 
-  &.alert {
+  &.badge-alert {
     background-color: $red;
   }
 
-  &.warning {
+  &.badge-warning {
     background-color: $yellow;
   }
 
-  &.ok {
+  &.badge-ok {
     background-color: $green;
   }
+}
+
+a.logo {
+  background: url('../images/logo@2x.png') no-repeat center center;
+  background-size: contain;
+  display: block;
+  height: 60px;
+  margin: 0 auto;
+  width: 300px;
 }
 
 section.footer {
   background-color: $gray-two;
   color: $gray-three;
-  font-size: .9em;
-  margin-bottom: 20px;
-  padding: 3rem 1.5rem;
+  font-size: .8em;
+  margin-bottom: 1em;
+  padding: 1.5em;
   text-align: center;
 }
 
 section.content {
   flex: 1;
-  margin-top: 10px;
 }
 
 // Home screen
 section.home {
+  margin-top: 40px;
+
   div.phone {
     background: url('../images/phone@2x.png') no-repeat center center;
     background-size: contain;
-    height: 800px;
+    height: 660px;
     margin-top: 40px;
     position: relative;
     width: 100%;
@@ -61,54 +76,41 @@ section.home {
       position: absolute;
       right: 5%;
       top: 40%;
-      width: 60%;
+      width: 80%;
     }
   }
 
   div.desc {
-    a.logo {
-      background: url('../images/logo@2x.png') no-repeat center center;
-      background-size: contain;
-      display: block;
-      height: 60px;
-      margin: 0 auto;
-      width: 400px;
-    }
+    font-size: 1.2em;
 
     h1 {
       color: $white;
-      font-size: 2.4em;
-      font-weight: 700;
+      font-size: 2em;
+      font-weight: 600;
       text-align: center;
+      margin: 1em 0;
+      display: none;
     }
 
-    p.hero {
+    p {
       color: $white;
-      font-size: 1.3em;
-      font-weight: 300;
       line-height: 1.6em;
       margin: 40px 0;
       text-align: center;
     }
+  }
 
-    a.button {
-      border: 0;
-      box-shadow: $shadow;
-      color: $white;
-      font-size: 1.3em;
-      margin-right: 10px;
-      padding: 30px;
-      text-transform: uppercase;
-      width: 100%;
-
-      &.register {
-        background-color: $red;
-      }
-
-      &.login {
-        background-color: $blue;
-      }
-    }
+  button.btn {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    margin-bottom: 12px;
+    border: 0;
+    border-radius: 0;
+    font-size: 1.3em;
+    color: $white;
+    background: $black-shade-25;
+    text-transform: uppercase;
   }
 }
 
@@ -117,20 +119,13 @@ section.menu {
   background: url('../images/header_pattern.png') repeat-x top center;
   padding: 2em 1.5em;
 
-  a.logo {
-    background: url('../images/logo@2x.png') no-repeat center center;
-    background-size: contain;
-    display: block;
-    height: 60px;
-    width: 400px;
-  }
-
   a.logout {
-    background: none;
-    border: 0;
     color: $white;
     font-size: .9em;
     text-transform: uppercase;
+    display: block;
+    text-align: center;
+    margin: 20px 0;
 
     span.icon {
       font-size: 1.2em;
@@ -144,20 +139,17 @@ section.menu {
     cursor: pointer;
     display: block;
     height: 70px;
-    position: relative;
     width: 70px;
+    left: calc(50% - 35px);
+    bottom: -70px;
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: 2px solid $white;
+    background-image: url('../images/sample_avatar_02.png');
 
-    span.pic {
-      background: url('../images/avatar_morty.png') no-repeat center center;
-      background-size: contain;
-      border-radius: 40px;
-      display: block;
-      height: 66px;
-      margin: 2px;
-      width: 66px;
-    }
-
-    span.tag {
+    span.badge {
       border-radius: 12px;
       position: absolute;
       right: -6px;
@@ -165,7 +157,40 @@ section.menu {
     }
   }
 
-  div.user-menu {
+  // Mobile slider menu
+  div.mobile-menu {
+    margin: 20px 0;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      button.btn {
+        display: block;
+        width: 100%;
+        padding: 16px 0;
+        margin-bottom: 4px;
+        border: 0;
+        border-radius: 0;
+        font-size: 1em;
+        color: $white;
+        background: $black-shade-25;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  // Desktop popover menu
+  div.desktop-menu {
+    display: none;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
     li {
       border-bottom: 1px solid $gray-two;
       cursor: pointer;
@@ -191,6 +216,23 @@ section.menu {
       div.media-left {
         margin-right: 20px;
       }
+
+      div.media-content {
+        text-align: left;
+
+        p.title {
+          color: $purple;
+          font-size: 1em;
+          margin-bottom: 0;
+          text-transform: uppercase;
+        }
+    
+        p.subtitle {
+          color: $gray-three;
+          font-size: .9em;
+          margin-bottom: 0;
+        }
+      }
     }
 
     span.icon {
@@ -199,6 +241,7 @@ section.menu {
       box-shadow: none;
       height: 40px;
       width: 40px;
+      display: block;
 
       &.account {
         background-image: url('../images/icon_account@2x.png');
@@ -220,123 +263,86 @@ section.menu {
         background-image: url('../images/icon_notifications@2x.png');
       }
     }
-
-    p.title {
-      color: $purple;
-      font-size: 1em;
-      margin-bottom: 1.8em;
-      text-transform: uppercase;
-    }
-
-    p.subtitle {
-      color: $gray-three;
-      font-size: .9em;
-    }
-  }
-
-  div.mobile-menu {
-    display: none;
   }
 }
 
+// Panel
 section.panel {
+  padding: 50px 0 20px;
+
   h1 {
     color: $purple;
   }
 }
 
-// Small devices (landscape phones, 576px and up)
-@media (max-width: 768px) {
+// Medium devices (tablets, 768px and up)
+@include media-breakpoint-up(md) {
   body.home {
-    background-size: 500%;
+    background-size: 230%;
   }
 
-  section.footer {
-    font-size: .8em;
+  a.logo {
+    width: 400px;
   }
 
   section.home {
     div.phone {
-      height: 600px;
+      height: 800px;
 
       div.sample-card {
-        width: 80%;
+        width: 60%;
       }
     }
 
     div.desc {
-      a.logo {
-        width: 300px;
+      font-size: 1.3em;
+    }
+
+    button.btn {
+      border: 0;
+      border-radius: 3px;
+      box-shadow: $shadow;
+      color: $white;
+      text-transform: uppercase;
+      width: 100%;
+  
+      &.register {
+        background-color: $red;
       }
-
-      h1 {
-        display: none;
-      }
-
-      p.hero {
-        font-size: 1.1em;
-      }
-
-      a.button {
-        box-shadow: none;
-        display: block;
-        font-size: 1.3em;
-        height: auto;
-        margin-bottom: 4px;
-        margin-right: 0;
-        padding: 10px 0;
-        width: 100%;
-
-        &.register {
-          background-color: $black-shade-25;
-        }
-
-        &.login {
-          background-color: $black-shade-25;
-        }
+  
+      &.login {
+        background-color: $blue;
       }
     }
   }
 
   section.menu {
     a.logo {
-      margin: 0 auto;
-      width: 300px;
+      margin: 0;
+      background-position: left center;
     }
 
     a.logout {
-      font-size: 1em;
-      margin: 12px 0;
-      width: 100%;
-    }
-
-    div.level-right {
-      position: relative;
+      margin-right: 20px;
+      float: right;
     }
 
     span.avatar {
-      left: calc(50% - 35px);
-      position: absolute;
+      position: relative;
+      left: 0;
+      bottom: 0;
+      float: right;
     }
 
     div.mobile-menu {
-      display: block;
-      margin-bottom: 20px;
-
-      a.button {
-        background-color: $black-shade-25;
-        border: 0;
-        box-shadow: none;
-        color: $white;
-        display: block;
-        font-size: .9em;
-        height: auto;
-        margin-bottom: 4px;
-        margin-right: 0;
-        padding: 16px 0;
-        text-transform: uppercase;
-        width: 100%;
-      }
+      display: none;
     }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@include media-breakpoint-up(lg) {
+  body.home {
+    background-size: 120%;
   }
 }
