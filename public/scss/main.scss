@@ -85,11 +85,11 @@ section.home {
 
     h1 {
       color: $white;
+      display: none;
       font-size: 2em;
       font-weight: 600;
-      text-align: center;
       margin: 1em 0;
-      display: none;
+      text-align: center;
     }
 
     p {
@@ -101,16 +101,16 @@ section.home {
   }
 
   button.btn {
-    display: block;
-    width: 100%;
-    padding: 12px 0;
-    margin-bottom: 12px;
+    background: $black-shade-25;
     border: 0;
     border-radius: 0;
-    font-size: 1.3em;
     color: $white;
-    background: $black-shade-25;
+    display: block;
+    font-size: 1.3em;
+    margin-bottom: 12px;
+    padding: 12px 0;
     text-transform: uppercase;
+    width: 100%;
   }
 }
 
@@ -121,11 +121,11 @@ section.menu {
 
   a.logout {
     color: $white;
-    font-size: .9em;
-    text-transform: uppercase;
     display: block;
-    text-align: center;
+    font-size: .9em;
     margin: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
 
     span.icon {
       font-size: 1.2em;
@@ -134,20 +134,20 @@ section.menu {
 
   span.avatar {
     background: $white;
+    background-image: url('../images/sample_avatar_02.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px solid $white;
     border-radius: 40px;
+    bottom: -70px;
     box-shadow: $shadow;
     cursor: pointer;
     display: block;
     height: 70px;
-    width: 70px;
     left: calc(50% - 35px);
-    bottom: -70px;
     position: absolute;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    border: 2px solid $white;
-    background-image: url('../images/sample_avatar_02.png');
+    width: 70px;
 
     span.badge {
       border-radius: 12px;
@@ -162,21 +162,21 @@ section.menu {
     margin: 20px 0;
 
     ul {
+      list-style: none;
       margin: 0;
       padding: 0;
-      list-style: none;
 
       button.btn {
-        display: block;
-        width: 100%;
-        padding: 16px 0;
-        margin-bottom: 4px;
+        background: $black-shade-25;
         border: 0;
         border-radius: 0;
-        font-size: 1em;
         color: $white;
-        background: $black-shade-25;
+        display: block;
+        font-size: 1em;
+        margin-bottom: 4px;
+        padding: 16px 0;
         text-transform: uppercase;
+        width: 100%;
       }
     }
   }
@@ -186,9 +186,9 @@ section.menu {
     display: none;
 
     ul {
+      list-style: none;
       margin: 0;
       padding: 0;
-      list-style: none;
     }
 
     li {
@@ -239,9 +239,9 @@ section.menu {
       background: none no-repeat center center;
       background-size: contain;
       box-shadow: none;
+      display: block;
       height: 40px;
       width: 40px;
-      display: block;
 
       &.account {
         background-image: url('../images/icon_account@2x.png');
@@ -305,11 +305,11 @@ section.panel {
       color: $white;
       text-transform: uppercase;
       width: 100%;
-  
+
       &.register {
         background-color: $red;
       }
-  
+
       &.login {
         background-color: $blue;
       }
@@ -318,20 +318,20 @@ section.panel {
 
   section.menu {
     a.logo {
-      margin: 0;
       background-position: left center;
+      margin: 0;
     }
 
     a.logout {
-      margin-right: 20px;
       float: right;
+      margin-right: 20px;
     }
 
     span.avatar {
-      position: relative;
-      left: 0;
       bottom: 0;
       float: right;
+      left: 0;
+      position: relative;
     }
 
     div.mobile-menu {

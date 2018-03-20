@@ -3,9 +3,6 @@
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 
-// Load application styles
-import 'index.css';
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
