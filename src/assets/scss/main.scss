@@ -9,13 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-weight: 100;
   min-height: 100vh;
-
-  &.home {
-    background: url('../images/bg_main@2x.png') no-repeat top center;
-    background-size: 340%;
-  }
 }
 
 span.badge {
@@ -59,7 +53,9 @@ section.content {
 
 // Home screen
 section.home {
-  margin-top: 40px;
+  background: url('../images/bg_main@2x.png') no-repeat top center;
+  background-size: 340%;
+  padding-top: 40px;
 
   div.phone {
     background: url('../images/phone@2x.png') no-repeat center center;
@@ -111,6 +107,10 @@ section.home {
     padding: 12px 0;
     text-transform: uppercase;
     width: 100%;
+
+    span.icon {
+      padding: 0 12px;
+    }
   }
 }
 
@@ -277,7 +277,7 @@ section.panel {
 
 // Medium devices (tablets, 768px and up)
 @include media-breakpoint-up(md) {
-  body.home {
+  section.home {
     background-size: 230%;
   }
 
@@ -287,8 +287,6 @@ section.panel {
 
   section.home {
     div.phone {
-      height: 800px;
-
       div.sample-card {
         width: 60%;
       }
@@ -342,7 +340,7 @@ section.panel {
 
 // Large devices (desktops, 992px and up)
 @include media-breakpoint-up(lg) {
-  body.home {
+  section.home {
     background-size: 120%;
   }
 }

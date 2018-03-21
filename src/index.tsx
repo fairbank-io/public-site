@@ -3,6 +3,10 @@
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 
+// Base application styles
+import 'assets/js/fontawesome-5.0.6.js';
+import 'assets/css/main.css';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -12,5 +16,5 @@ ReactDOM.render(
   <Router >
     <Main />
   </Router >,
-  document.getElementById('root') as HTMLElement
+  document.getElementById('main-wrapper') as HTMLElement
 );

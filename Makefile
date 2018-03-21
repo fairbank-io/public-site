@@ -1,3 +1,4 @@
+.PHONY: build
 default: help
 VERSION=0.1.0
 
@@ -9,13 +10,13 @@ clean: ## Remove temporary files
 	@rm -rf build
 	@rm -rf node_modules
 	@rm -rf coverage
-	@rm -rf public/css
+	@rm -rf src/assets/css
 
 build: ## Build for production
-	yarn build
+	yarn run build
 
 start: ## Run dev server
-	yarn start
+	yarn run start
 
 deps: ## Install required dependencies
 	yarn install

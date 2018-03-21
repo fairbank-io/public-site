@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build-css": "node-sass-chokidar --output-style compressed --source-map true --source-map-contents public/scss -o public/css",
-    "watch-css": "npm run build-css && node-sass-chokidar --output-style compressed --source-map true --source-map-contents public/scss -o public/css -w",
+    "build-css": "node-sass-chokidar --output-style compressed --source-map true --source-map-contents src/assets/scss -o src/assets/css",
+    "watch-css": "npm run build-css && node-sass-chokidar --output-style compressed --source-map true --source-map-contents src/assets/scss -o src/assets/css -w",
     "start-js": "react-scripts-ts start",
     "build-js": "react-scripts-ts build",
     "start": "npm-run-all -p watch-css start-js",

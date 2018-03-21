@@ -1,24 +1,15 @@
 import * as React from 'react';
-import { Link, Route } from 'react-router-dom';
-import Wrapper from './Wrapper';
+// import PanelMain from 'panel/Main';
+import HomeContent from 'home/Content';
+import Footer from 'Footer';
 
 class Main extends React.Component<{}, {}> {
   public render(): JSX.Element {
     return (
-      <div className="content">
-        <ul>
-          <li>
-            <Link to="fair">FAIR</Link>
-          </li>
-          <li>
-            <Link to="btc">BTC</Link>
-          </li>
-          <li>
-            <Link to="ltc">LTC</Link>
-          </li>
-        </ul>
-        <Route path="*" component={Wrapper} />
-      </div>
+      <section>
+        <HomeContent />
+        <Footer />
+      </section>
     );
   }
 }
