@@ -5,11 +5,26 @@
 // Base framework
 @import 'bootstrap-4.0.0/bootstrap';
 
+html {
+  min-height: 100%;
+  position: relative;
+}
+
 body {
-  display: flex;
-  flex-direction: column;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  min-height: 100vh;
+  margin-bottom: 190px; // Based on footer height
+}
+
+section.footer {
+  background-color: $gray-two;
+  bottom: 0;
+  color: $gray-three;
+  font-size: .8em;
+  margin-bottom: 1em;
+  padding: 1.5em;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 }
 
 span.badge {
@@ -36,19 +51,6 @@ a.logo {
   height: 60px;
   margin: 0 auto;
   width: 300px;
-}
-
-section.footer {
-  background-color: $gray-two;
-  color: $gray-three;
-  font-size: .8em;
-  margin-bottom: 1em;
-  padding: 1.5em;
-  text-align: center;
-}
-
-section.content {
-  flex: 1;
 }
 
 // Home screen
@@ -268,7 +270,7 @@ section.menu {
 
 // Panel
 section.panel {
-  padding: 50px 0 20px;
+  padding-top: 50px;
 
   h1 {
     color: $purple;
