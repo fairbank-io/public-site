@@ -1,6 +1,9 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
 
-class HomeContent extends React.Component<{}, {}> {
+interface Props extends RouteComponentProps<void> {}
+
+class HomeContent extends React.Component<Props, {}> {
   public render(): JSX.Element {
     return (
       <section className="content home">

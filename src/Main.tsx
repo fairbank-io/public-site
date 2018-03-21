@@ -1,18 +1,38 @@
 import * as React from 'react';
-// import PanelMain from 'panel/Main';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { ApplicationState } from 'state';
+import { ActionDispatcher } from 'state/actions';
+
+// UI
 import HomeContent from 'home/Content';
+import PanelMain from 'panel/Main';
 import Footer from 'Footer';
 
-class Main extends React.Component<{}, {}> {
+// Component properties
+interface ComponentProps extends ActionDispatcher {}
+
+// Component state
+interface ComponentState {}
+
+class Main extends React.Component<ComponentProps, ComponentState> {
+  static stateToProps (state: ApplicationState): Partial<ComponentProps> {
+    return {};
+  }
+
+  constructor(props: ComponentProps) {
+    super(props);
+  }
+
   public render(): JSX.Element {
     return (
       <section>
-        <HomeContent />
+        <Route path="/" exact={true} component={HomeContent} />
+        <Route path="/panel" component={PanelMain} />
         <Footer />
       </section>
     );
   }
 }
 
-// Module exports
-export default Main;
+export default connect(Main.stateToProps)(Main);
