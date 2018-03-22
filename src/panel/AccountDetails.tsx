@@ -11,5 +11,4 @@ class AccountDetails extends React.Component<{}, {}> {
   }
 }
 
-// Module exports
 export default AccountDetails;

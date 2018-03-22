@@ -11,5 +11,4 @@ class Transactions extends React.Component<{}, {}> {
   }
 }
 
-// Module exports
 export default Transactions;

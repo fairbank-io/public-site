@@ -11,5 +11,4 @@ class Invites extends React.Component<{}, {}> {
   }
 }
 
-// Module exports
 export default Invites;

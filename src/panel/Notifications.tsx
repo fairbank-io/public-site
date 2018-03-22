@@ -11,5 +11,4 @@ class Notifications extends React.Component<{}, {}> {
   }
 }
 
-// Module exports
 export default Notifications;

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Route } from 'react-router-dom';
-
-// UI
 import Header from 'panel/Header';
 import AccountDetails from 'panel/AccountDetails';
 import Invites from 'panel/Invites';
@@ -10,13 +8,22 @@ import Notifications from 'panel/Notifications';
 import MarketData from 'panel/MarketData';
 import Transactions from 'panel/Transactions';
 
-interface Props extends RouteComponentProps<void> {}
+// Component properties
+interface ComponentProps extends RouteComponentProps<void> {}
 
-class PanelMain extends React.Component<Props, {}> {
+// Component state
+interface ComponentState {}
+
+class PanelMain extends React.Component<ComponentProps, ComponentState> {
+  constructor(props: ComponentProps) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
   public render(): JSX.Element {
     return (
       <section>
-        <Header />
+        <Header notificationsCounter={0} onLogoutRequest={this.logout} />
         <section className="content panel">
           <div className="container">
             <div className="row">
@@ -33,7 +40,10 @@ class PanelMain extends React.Component<Props, {}> {
       </section>
     );
   }
+
+  private logout(): void {
+    // Handle logout request
+  }
 }
 
-// Module exports
 export default PanelMain;

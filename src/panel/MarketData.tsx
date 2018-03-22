@@ -11,5 +11,4 @@ class MarketData extends React.Component<{}, {}> {
   }
 }
 
-// Module exports
 export default MarketData;

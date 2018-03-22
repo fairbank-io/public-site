@@ -121,8 +121,9 @@ section.menu {
   background: url('../images/header_pattern.png') repeat-x top center;
   padding: 2em 1.5em;
 
-  a.logout {
+  span.logout {
     color: $white;
+    cursor: pointer;
     display: block;
     font-size: .9em;
     margin: 20px 0;
@@ -131,6 +132,7 @@ section.menu {
 
     span.icon {
       font-size: 1.2em;
+      margin-right: 6px;
     }
   }
 
@@ -322,7 +324,7 @@ section.panel {
       margin: 0;
     }
 
-    a.logout {
+    span.logout {
       float: right;
       margin-right: 20px;
     }
