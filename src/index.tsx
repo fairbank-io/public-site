@@ -9,15 +9,15 @@ import 'assets/css/main.css';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ApplicationStore } from 'state';
 import Main from 'Main';
 
 ReactDOM.render(
   <Provider store={ApplicationStore}>
-    <Router>
-      <Main />
+    <Router forceRefresh={!('pushState' in window.history)}>
+      <Route component={Main} />
     </Router>
   </Provider>,
   document.getElementById('main-wrapper') as HTMLElement

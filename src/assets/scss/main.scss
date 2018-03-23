@@ -121,6 +121,12 @@ section.menu {
   background: url('../images/header_pattern.png') repeat-x top center;
   padding: 2em 1.5em;
 
+  a.router-navlink {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
   span.logout {
     color: $white;
     cursor: pointer;

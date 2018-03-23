@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 
-interface Props extends RouteComponentProps<void> {}
+// Component properties
+interface ComponentProps {}
 
-class HomeContent extends React.Component<Props, {}> {
+// Component state
+interface ComponentState {}
+
+class Content extends React.Component<ComponentProps, ComponentState> {
   public render(): JSX.Element {
     return (
       <section className="content home">
@@ -25,8 +28,8 @@ class HomeContent extends React.Component<Props, {}> {
               <button className="btn register">
                 <span>Crear Cuenta</span>
                 <span className="icon">
-                    <i className="fas fa-address-card" />
-                  </span>
+                      <i className="fas fa-address-card" />
+                    </span>
               </button>
             </div>
             <div className="col-md-4">
@@ -52,4 +55,4 @@ class HomeContent extends React.Component<Props, {}> {
 }
 
 // Module exports
-export default HomeContent;
+export default Content;

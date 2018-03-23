@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as jQuery  from 'jquery';
+import { NavLink } from 'react-router-dom';
 
 class MobileMenu extends React.Component<{}, {}> {
   el: Element | null;
@@ -9,16 +10,24 @@ class MobileMenu extends React.Component<{}, {}> {
       <div className="mobile-menu" ref={(el) => this.el = el}>
         <ul>
           <li>
-            <button className="btn">Mi Cuenta</button>
+            <NavLink to={'/panel'} className={'router-navlink'}>
+              <button className="btn">Mi Cuenta</button>
+            </NavLink>
           </li>
           <li>
-            <button className="btn">Transacciones</button>
+            <NavLink to={'/panel/transactions'} className={'router-navlink'}>
+              <button className="btn">Transacciones</button>
+            </NavLink>
           </li>
           <li>
-            <button className="btn">Inivitaciones</button>
+            <NavLink to={'/panel/invites'} className={'router-navlink'}>
+              <button className="btn">Inivitaciones</button>
+            </NavLink>
           </li>
           <li>
-            <button className="btn">Notificaciones</button>
+            <NavLink to={'/panel/notifications'} className={'router-navlink'}>
+              <button className="btn">Notificaciones</button>
+            </NavLink>
           </li>
         </ul>
       </div>

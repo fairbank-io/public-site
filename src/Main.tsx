@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ApplicationState } from 'state';
-import { ActionDispatcher } from 'state/actions';
 import { Session } from 'state/data';
 
 // UI
-import HomeContent from 'home/Content';
+import HomeMain from 'home/Main';
 import PanelMain from 'panel/Main';
 import Footer from 'Footer';
 
 // Component properties
-interface ComponentProps extends ActionDispatcher {
+interface ComponentProps {
   session: Session;
 }
 
@@ -32,8 +31,10 @@ class Main extends React.Component<ComponentProps, ComponentState> {
   public render(): JSX.Element {
     return (
       <section>
-        <Route path="/" exact={true} component={HomeContent} />
-        <Route path="/panel" component={PanelMain} />
+        <Switch>
+          <Route path="/panel" component={PanelMain} />
+          <Route component={HomeMain} />
+        </Switch>
         <Footer />
       </section>
     );
