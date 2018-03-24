@@ -29,6 +29,7 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
+    "@types/bootstrap": "^4.0.1",
     "@types/chart.js": "^2.7.3",
     "@types/enzyme": "^3.1.6",
     "@types/enzyme-adapter-react-16": "^1.0.1",
