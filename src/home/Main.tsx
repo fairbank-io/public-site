@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, RouteComponentProps } from 'react-router-dom';
 import { ActionDispatcher } from 'state/actions';
 import Content from 'home/Content';
 
 // Component properties
-interface ComponentProps extends ActionDispatcher {}
+interface ComponentProps extends ActionDispatcher, RouteComponentProps<void> {}
 
 // Component state
 interface ComponentState {}
@@ -16,12 +16,14 @@ class HomeMain extends React.Component<ComponentProps, ComponentState> {
       <section>
         <Route
           path={'/home/register'}
+          exact={true}
           render={() => (
             <p>register</p>
           )}
         />
         <Route
           path={'/home/login'}
+          exact={true}
           render={() => (
             <p>login</p>
           )}

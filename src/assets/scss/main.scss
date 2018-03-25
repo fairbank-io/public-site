@@ -53,6 +53,12 @@ a.logo {
   width: 300px;
 }
 
+a.router-navlink {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 // Home screen
 section.home {
   background: url('../images/bg_main@2x.png') no-repeat top center;
@@ -120,12 +126,6 @@ section.home {
 section.menu {
   background: url('../images/header_pattern.png') repeat-x top center;
   padding: 2em 1.5em;
-
-  a.router-navlink {
-    &:hover {
-      text-decoration: none;
-    }
-  }
 
   span.logout {
     color: $white;

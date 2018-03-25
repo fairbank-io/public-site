@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 
 // Component properties
 interface ComponentProps {}
@@ -25,20 +26,24 @@ class Content extends React.Component<ComponentProps, ComponentState> {
           </div>
           <div className="row">
             <div className="col-md-4 offset-md-2">
-              <button className="btn register">
-                <span>Crear Cuenta</span>
-                <span className="icon">
-                      <i className="fas fa-address-card" />
-                    </span>
-              </button>
+              <NavLink to={'/home/register'} className={'router-navlink'}>
+                <button className="btn register">
+                  <span>Crear Cuenta</span>
+                  <span className="icon">
+                  <i className="fas fa-address-card" />
+                </span>
+                </button>
+              </NavLink>
             </div>
             <div className="col-md-4">
-              <button className="btn login">
-                <span>Iniciar Sesión</span>
-                <span className="icon">
-                    <i className="fas fa-lock" />
-                  </span>
-              </button>
+              <NavLink to={'/home/login'} className={'router-navlink'}>
+                <button className="btn login">
+                  <span>Iniciar Sesión</span>
+                  <span className="icon">
+                  <i className="fas fa-lock" />
+                </span>
+                </button>
+              </NavLink>
             </div>
           </div>
           <div className="row">
