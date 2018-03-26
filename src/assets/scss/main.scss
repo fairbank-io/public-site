@@ -59,6 +59,51 @@ a.router-navlink {
   }
 }
 
+div.modal {
+  div.modal-header {
+    background-color: $purple;
+    color: $white;
+
+    h5.modal-title {
+      color: $white;
+      text-transform: uppercase;
+    }
+
+    button.close {
+      color: $white;
+    }
+  }
+
+  &.modal-open {
+    background-color: $black-shade-75;
+  }
+
+  div.modal-dialog {
+    margin-top: 10%;
+  }
+
+  div.form-buttons {
+    text-align: right;
+
+    button {
+      margin-left: 8px;
+    }
+  }
+}
+
+button {
+  &.submit {
+    background-color: $purple;
+    border-color: $purple;
+    color: $white;
+  }
+
+  &.cancel {
+    background-color: $gray-300;
+    color: $gray-four;
+  }
+}
+
 // Home screen
 section.home {
   background: url('../images/bg_main@2x.png') no-repeat top center;
