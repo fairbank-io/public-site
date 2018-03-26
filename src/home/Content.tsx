@@ -30,8 +30,8 @@ class Content extends React.Component<ComponentProps, ComponentState> {
                 <button className="btn register">
                   <span>Crear Cuenta</span>
                   <span className="icon">
-                  <i className="fas fa-address-card" />
-                </span>
+                    <i className="fas fa-address-card" />
+                  </span>
                 </button>
               </NavLink>
             </div>
@@ -40,8 +40,8 @@ class Content extends React.Component<ComponentProps, ComponentState> {
                 <button className="btn login">
                   <span>Iniciar Sesión</span>
                   <span className="icon">
-                  <i className="fas fa-lock" />
-                </span>
+                    <i className="fas fa-lock" />
+                  </span>
                 </button>
               </NavLink>
             </div>

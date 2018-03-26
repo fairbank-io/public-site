@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import * as redux from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ApplicationState } from 'state';
 import { Session } from 'state/data';
@@ -41,4 +41,4 @@ class Main extends React.Component<ComponentProps, ComponentState> {
   }
 }
 
-export default connect(Main.stateToProps)(Main);
+export default redux.connect(Main.stateToProps)(Main);

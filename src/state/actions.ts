@@ -3,14 +3,13 @@ import { Dispatch } from 'react-redux';
 // Available action types
 enum ActionType {
   LOGIN = 'LOGIN',
-  LOGOUT = 'LOGOUT',
-  REGISTER = 'REGISTER'
+  LOGOUT = 'LOGOUT'
 }
 
 // Base action object
 interface Action {
   type: ActionType;
-  value: object;
+  data: object;
 }
 
 // All components that require dispatch actions to the state store should extend

@@ -1,8 +1,13 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import * as redux from 'react-redux';
 import { Route, RouteComponentProps } from 'react-router-dom';
-import { ActionDispatcher } from 'state/actions';
+import { Action, ActionType, ActionDispatcher } from 'state/actions';
+
+// UI
 import Content from 'home/Content';
+import SimpleModal from  'components/SimpleModal';
+import RegisterForm from 'home/RegisterForm';
+import LoginForm from 'home/LoginForm';
 
 // Component properties
 interface ComponentProps extends ActionDispatcher, RouteComponentProps<void> {}
@@ -18,14 +23,30 @@ class HomeMain extends React.Component<ComponentProps, ComponentState> {
           path={'/home/register'}
           exact={true}
           render={() => (
-            <p>register</p>
+            <SimpleModal title={'Registrar Nueva Cuenta'} onHide={() => this.props.history.push('/')}>
+              <RegisterForm />
+            </SimpleModal>
           )}
         />
         <Route
           path={'/home/login'}
           exact={true}
           render={() => (
-            <p>login</p>
+            <SimpleModal title={'Iniciar Sesión'} onHide={() => this.props.history.push('/')}>
+              <LoginForm
+                onNewSession={(s) => {
+                  // Dispatch action
+                  let ac: Action = {
+                    type: ActionType.LOGIN,
+                    data: s
+                  };
+                  this.props.dispatch(ac);
+
+                  // Load panel
+                  this.props.history.push('/panel');
+                }}
+              />
+            </SimpleModal>
           )}
         />
         <Route component={Content} />
@@ -34,4 +55,4 @@ class HomeMain extends React.Component<ComponentProps, ComponentState> {
   }
 }
 
-export default connect()(HomeMain);
+export default redux.connect()(HomeMain);
