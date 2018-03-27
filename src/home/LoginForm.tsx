@@ -148,7 +148,6 @@ class LoginForm extends React.Component<ComponentProps, ComponentState> {
     });
   }
 
-  // Pack form data into a valid session request
   private getRequest(): API.RequestSession {
     let req: API.RequestSession = {} as API.RequestSession;
     if (!this.form) {

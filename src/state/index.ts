@@ -8,15 +8,21 @@ interface ApplicationState {
   account_info: AccountInfo;
 }
 
-// Initial empty application state
-const initialState: ApplicationState = <ApplicationState> {};
+// Load initial application state
+function getInitialState(): ApplicationState {
+  let state: ApplicationState = {} as ApplicationState;
+  let storedState: string | null = window.sessionStorage.getItem('application_state');
+  if (storedState) {
+    state = JSON.parse(storedState);
+  }
+  return state;
+}
 
 // Single state reducer
 function reducer(state: ApplicationState, action: Action): ApplicationState {
   if (!state) {
-    state = initialState;
+    state = getInitialState();
   }
-
   let newState: ApplicationState = Object.assign(<ApplicationState> {}, state);
 
   switch (action.type) {
@@ -24,14 +30,15 @@ function reducer(state: ApplicationState, action: Action): ApplicationState {
       newState.session = action.data as Session;
       break;
     case ActionType.LOGOUT:
-      newState.session = {} as Session;
+      newState = {} as ApplicationState;
       break;
     default:
       return state;
   }
+  window.sessionStorage.setItem('application_state', JSON.stringify(newState));
   return newState;
 }
-let store = createStore(reducer);
+let store = createStore(reducer, getInitialState());
 
 export {
   ApplicationState,
