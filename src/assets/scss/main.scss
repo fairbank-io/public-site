@@ -99,6 +99,25 @@ div.card {
   }
 }
 
+div.emtpy-notice {
+  color: $gray-two;
+  padding-top: 10%;
+  text-align: center;
+
+  h2 {
+    text-transform: uppercase;
+  }
+
+  span.icon {
+    font-size: 6em;
+  }
+
+  p {
+    font-style: italic;
+    text-transform: uppercase;
+  }
+}
+
 button {
   &.submit {
     background-color: $purple;

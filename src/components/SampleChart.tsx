@@ -112,17 +112,28 @@ class SampleChart extends React.Component<Props, State> {
   public render(): JSX.Element {
     return (
       <div>
-        <p>Price information: <b>{this.state.asset}</b></p>
-        <p>Current price is: <b>${this.state.currentPrice} USD</b></p>
-        <select value={this.state.period} onChange={(e) => this.getData(this.state.asset, e.target.value as Period)}>
-          <option value={Period.HOUR}>Hour</option>
-          <option value={Period.DAY}>Day</option>
-          <option value={Period.WEEK}>Week</option>
-          <option value={Period.MONTH}>Month</option>
-          <option value={Period.YEAR}>Year</option>
-        </select>
+        <p>
+          Divisa seleccionada: <span className="badge badge-secondary">{this.state.asset}</span> /
+          Precio actual: <span className="badge badge-success">${this.state.currentPrice || 0} USD</span> /
+        </p>
+        <div className="form-row">
+          <div className="form-group col-md-4">
+            <label>Periodo Seleccionado</label>
+            <select
+              value={this.state.period}
+              onChange={(e) => this.getData(this.state.asset, e.target.value as Period)}
+              className="custom-select"
+            >
+              <option value={Period.HOUR}>Ultima Hora</option>
+              <option value={Period.DAY}>Dia</option>
+              <option value={Period.WEEK}>Semana</option>
+              <option value={Period.MONTH}>Mes</option>
+              <option value={Period.YEAR}>Año</option>
+            </select>
+          </div>
+        </div>
         <div className="chart-container">
-          <canvas ref={(c) => this.canvas = c} width="300" height="200" />
+          <canvas ref={(c) => this.canvas = c} />
         </div>
       </div>
     );
@@ -201,8 +212,8 @@ class SampleChart extends React.Component<Props, State> {
   private updateChart() {
     this.chart.data.datasets = [{
       label: this.props.label,
-      backgroundColor: 'rgba(145, 100, 164, 0.7)',
-      borderColor: 'rgb(145, 100, 164)',
+      backgroundColor: 'rgba(126, 87, 194, 0.6)',
+      borderColor: 'rgb(126, 87, 194)',
       fill: 'origin',
       data: this.state.data,
       lineTension: 0.2

@@ -3,7 +3,7 @@ import * as redux from 'react-redux';
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { ApplicationState } from 'state';
 import { Action, ActionType, ActionDispatcher } from 'state/actions';
-import { AccountDetails, AccountInfo, Session } from 'state/data';
+import { AccountDetails, AccountInfo, Referral, Notification, Session } from 'state/data';
 import * as API from 'state/api';
 
 // UI
@@ -77,13 +77,15 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                   <Route
                     path={this.props.match.url + '/invites'}
                     render={() => (
-                      <Invites />
+                      <Invites
+                        invitesList={this.props.account_info.referrals || [] as Referral[]}
+                      />
                     )}
                   />
                   <Route
                     path={this.props.match.url + '/notifications'}
                     render={() => (
-                      <Notifications />
+                      <Notifications messagesList={[] as Notification[]} />
                     )}
                   />
                   <Route
@@ -95,7 +97,9 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                   <Route
                     path={this.props.match.url + '/transactions'}
                     render={() => (
-                      <Transactions />
+                      <Transactions
+                        transactionsList={this.props.account_info.transactions || [] as Transactions[]}
+                      />
                     )}
                   />
                   <Route
@@ -105,7 +109,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                         details={this.props.account_info.details || {} as AccountDetails}
                         onUpdateRequest={(d: AccountDetails) => {
                           this.client.AccountUpdate(this.props.session, d, (r, e) => {
-                            if (this.setAlert(r, e)) {
+                            if (this.handleResult(r, e)) {
                               this.setState({
                                 alert: 'Tu información ha sido actualizada con exitosamente',
                                 alertLevel: 'success'
@@ -128,7 +132,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
 
   private loadAccountInfo(): void {
     this.client.AccountInfo(this.props.session, (r, e) => {
-      if (this.setAlert(r, e)) {
+      if (this.handleResult(r, e)) {
         if (r && r.ok) {
           let ac: Action = {
             type: ActionType.ACCOUNT_INFO,
@@ -142,7 +146,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
 
   private logout(): void {
     this.client.Logout(this.props.session, (r, e) => {
-      if (this.setAlert(r, e)) {
+      if (this.handleResult(r, e)) {
         // Dispatch action
         let ac: Action = {
           type: ActionType.LOGOUT,
@@ -156,7 +160,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     });
   }
 
-  private setAlert(r: API.Response | null, error: string | null): boolean {
+  private handleResult(r: API.Response | null, error: string | null): boolean {
     // Failed requests
     if (error) {
       this.setState({

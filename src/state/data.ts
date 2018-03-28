@@ -96,6 +96,15 @@ interface AccountInfo {
   extensions?: Extension[];
 }
 
+// Messages related to an account
+interface Notification {
+  title: string;
+  priority: number;
+  contents: string;
+  creation_date: Date;
+  read_date: Date;
+}
+
 // Module exports
 export {
   AccountInfo,
@@ -105,6 +114,7 @@ export {
   CardToken,
   Document,
   Extension,
+  Notification,
   Referral,
   Session,
   Transaction
