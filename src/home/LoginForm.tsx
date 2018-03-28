@@ -4,11 +4,8 @@ import * as CryptoJS from 'crypto-js';
 import * as API from 'state/api';
 import { Session } from 'state/data';
 
-// Form elements
-interface FormItem {
-  name: string;
-  value: string;
-}
+// UI
+import Alert from 'components/Alert';
 
 // Component properties
 interface ComponentProps {
@@ -41,19 +38,12 @@ class LoginForm extends React.Component<ComponentProps, ComponentState> {
   }
 
   public render(): JSX.Element {
-    // Build alert message
-    let alert: JSX.Element | null = null;
-    if (this.state.alert) {
-      let alertType: string = 'alert alert-' + this.state.alertLevel;
-      alert = <div className={alertType}>{this.state.alert}</div>;
-    }
-
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col">
             <p>Proporciona las credenciales de acceso de tu cuenta para iniciar una nueva sesión.</p>
-            {alert}
+            <Alert type={this.state.alertLevel}>{this.state.alert}</Alert>
             <form className="needs-validation" noValidate={true} ref={(el) => this.form = el}>
               <div className="form-group">
                 <label>Correo Electrónico</label>
@@ -154,7 +144,7 @@ class LoginForm extends React.Component<ComponentProps, ComponentState> {
       return req;
     }
 
-    jQuery(this.form).serializeArray().forEach(function (k: FormItem) {
+    jQuery(this.form).serializeArray().forEach(function (k: JQuery.NameValuePair) {
       req[k.name] = k.value;
     });
     req.password = CryptoJS.SHA256(req.password).toString();

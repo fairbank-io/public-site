@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as redux from 'react-redux';
-import { Route, RouteComponentProps } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { Action, ActionType, ActionDispatcher } from 'state/actions';
+import { Session } from 'state/data';
+import { ApplicationState } from 'state';
 
 // UI
 import Content from 'home/Content';
@@ -10,13 +12,26 @@ import RegisterForm from 'home/RegisterForm';
 import LoginForm from 'home/LoginForm';
 
 // Component properties
-interface ComponentProps extends ActionDispatcher, RouteComponentProps<void> {}
+interface ComponentProps extends ActionDispatcher, RouteComponentProps<void> {
+  session: Session;
+}
 
 // Component state
 interface ComponentState {}
 
 class HomeMain extends React.Component<ComponentProps, ComponentState> {
+  static stateToProps (state: ApplicationState): Partial<ComponentProps> {
+    return {
+      session: state.session
+    };
+  }
+
   public render(): JSX.Element {
+    // Go to the user panel
+    if (this.props.session) {
+      return ( <Redirect to={'/panel'} /> );
+    }
+
     return (
       <section>
         <Route
@@ -55,4 +70,4 @@ class HomeMain extends React.Component<ComponentProps, ComponentState> {
   }
 }
 
-export default redux.connect()(HomeMain);
+export default redux.connect(HomeMain.stateToProps)(HomeMain);
