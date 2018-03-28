@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import {
   Session,
-  Referral
+  Referral, AccountDetails
 } from 'state/data';
 
 // Request's dispatched to the platform's backend
@@ -62,6 +62,14 @@ class Client {
 
   public Register(data: RequestAccountRegister, cb: ClientCallback) {
     this.request('/account', cb, data);
+  }
+
+  public AccountInfo(session: Session, cb: ClientCallback) {
+    this.request('/account/info', cb, null, session);
+  }
+
+  public AccountUpdate(session: Session, data: AccountDetails, cb: ClientCallback) {
+    this.request('/account/update', cb, data, session);
   }
 
   private request(path: string, cb: ClientCallback, data?: object | null, session?: Session) {

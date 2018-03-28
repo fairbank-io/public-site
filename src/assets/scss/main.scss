@@ -91,6 +91,14 @@ div.modal {
   }
 }
 
+div.card {
+  margin-bottom: 6px;
+
+  div.card-header {
+    cursor: pointer;
+  }
+}
+
 button {
   &.submit {
     background-color: $purple;

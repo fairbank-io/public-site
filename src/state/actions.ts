@@ -3,7 +3,8 @@ import { Dispatch } from 'react-redux';
 // Available action types
 enum ActionType {
   LOGIN = 'LOGIN',
-  LOGOUT = 'LOGOUT'
+  LOGOUT = 'LOGOUT',
+  ACCOUNT_INFO = 'ACCOUNT_INFO'
 }
 
 // Base action object

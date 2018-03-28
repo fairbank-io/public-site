@@ -32,6 +32,9 @@ function reducer(state: ApplicationState, action: Action): ApplicationState {
     case ActionType.LOGOUT:
       newState = {} as ApplicationState;
       break;
+    case ActionType.ACCOUNT_INFO:
+      newState.account_info = action.data as AccountInfo;
+      break;
     default:
       return state;
   }

@@ -3,12 +3,13 @@ import * as redux from 'react-redux';
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { ApplicationState } from 'state';
 import { Action, ActionType, ActionDispatcher } from 'state/actions';
-import { AccountInfo, Session } from 'state/data';
+import { AccountDetails, AccountInfo, Session } from 'state/data';
 import * as API from 'state/api';
 
 // UI
+import Alert from 'components/Alert';
 import Header from 'panel/Header';
-import AccountDetails from 'panel/AccountDetails';
+import GeneralDetails from 'panel/GeneralDetails';
 import Invites from 'panel/Invites';
 import Notifications from 'panel/Notifications';
 import MarketData from 'panel/MarketData';
@@ -31,7 +32,8 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
 
   static stateToProps (state: ApplicationState): Partial<ComponentProps> {
     return {
-      session: state.session
+      session: state.session,
+      account_info: state.account_info
     };
   }
 
@@ -45,17 +47,22 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     };
   }
 
-  public render(): JSX.Element {
+  componentWillMount(): void {
+    // Load data if not available yet
+    if (this.props.session && !this.props.account_info) {
+      this.loadAccountInfo();
+    }
+  }
+
+  public render(): JSX.Element | null {
     // Go home
     if (!this.props.session) {
       return ( <Redirect to={'/'} /> );
     }
 
-    // Build alert message
-    let alert: JSX.Element | null = null;
-    if (this.state.alert) {
-      let alertType: string = 'alert alert-' + this.state.alertLevel;
-      alert = <div className={alertType}>{this.state.alert}</div>;
+    // Wait for data to render
+    if (!this.props.account_info) {
+      return null;
     }
 
     return (
@@ -65,13 +72,51 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
           <div className="container">
             <div className="row">
               <div className="col-md-10 offset-md-1">
-                {alert}
+                <Alert type={this.state.alertLevel}>{this.state.alert}</Alert>
                 <Switch>
-                  <Route path={this.props.match.url + '/invites'} component={Invites} />
-                  <Route path={this.props.match.url + '/notifications'} component={Notifications} />
-                  <Route path={this.props.match.url + '/market'} component={MarketData} />
-                  <Route path={this.props.match.url + '/transactions'} component={Transactions} />
-                  <Route path={this.props.match.url} component={AccountDetails} />
+                  <Route
+                    path={this.props.match.url + '/invites'}
+                    render={() => (
+                      <Invites />
+                    )}
+                  />
+                  <Route
+                    path={this.props.match.url + '/notifications'}
+                    render={() => (
+                      <Notifications />
+                    )}
+                  />
+                  <Route
+                    path={this.props.match.url + '/market'}
+                    render={() => (
+                      <MarketData />
+                    )}
+                  />
+                  <Route
+                    path={this.props.match.url + '/transactions'}
+                    render={() => (
+                      <Transactions />
+                    )}
+                  />
+                  <Route
+                    path={this.props.match.url}
+                    render={() => (
+                      <GeneralDetails
+                        details={this.props.account_info.details || {} as AccountDetails}
+                        onUpdateRequest={(d: AccountDetails) => {
+                          this.client.AccountUpdate(this.props.session, d, (r, e) => {
+                            if (this.setAlert(r, e)) {
+                              this.setState({
+                                alert: 'Tu información ha sido actualizada con exitosamente',
+                                alertLevel: 'success'
+                              });
+                              this.loadAccountInfo();
+                            }
+                          });
+                        }}
+                      />
+                    )}
+                  />
                 </Switch>
               </div>
             </div>
@@ -81,28 +126,23 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     );
   }
 
+  private loadAccountInfo(): void {
+    this.client.AccountInfo(this.props.session, (r, e) => {
+      if (this.setAlert(r, e)) {
+        if (r && r.ok) {
+          let ac: Action = {
+            type: ActionType.ACCOUNT_INFO,
+            data: r.data
+          };
+          this.props.dispatch(ac);
+        }
+      }
+    });
+  }
+
   private logout(): void {
     this.client.Logout(this.props.session, (r, e) => {
-      // Failed requests
-      if (e) {
-        this.setState({
-          alert: 'Error Interno: ' + e,
-          alertLevel: 'danger'
-        });
-        return;
-      }
-
-      // Bad results
-      if (r && !r.ok) {
-        this.setState({
-          alert: r.desc,
-          alertLevel: 'warning'
-        });
-        return;
-      }
-
-      // All good!
-      if (r && r.ok) {
+      if (this.setAlert(r, e)) {
         // Dispatch action
         let ac: Action = {
           type: ActionType.LOGOUT,
@@ -114,6 +154,33 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
         this.props.history.push('/');
       }
     });
+  }
+
+  private setAlert(r: API.Response | null, error: string | null): boolean {
+    // Failed requests
+    if (error) {
+      this.setState({
+        alert: 'Error Interno: ' + error,
+        alertLevel: 'danger'
+      });
+      return false;
+    }
+
+    // Bad results
+    if (r && !r.ok) {
+      this.setState({
+        alert: r.desc,
+        alertLevel: 'warning'
+      });
+      return false;
+    }
+
+    // All good!
+    if (r && r.ok) {
+      return true;
+    }
+
+    return false;
   }
 }
 
