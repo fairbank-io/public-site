@@ -19,8 +19,10 @@ class Avatar extends React.Component<ComponentProps, {}> {
       badge = <span className="badge badge-alert">{this.props.counter}</span>;
     }
 
+    // Sample avatar
+    let sample: string = 'avatar sample-0' + (Math.floor(Math.random() * 5) + 1);
     return (
-      <span className="avatar" onClick={this.props.onClick}>
+      <span className={sample} onClick={this.props.onClick}>
         {badge}
       </span>
     );

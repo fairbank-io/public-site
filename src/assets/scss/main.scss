@@ -220,7 +220,6 @@ section.menu {
 
   span.avatar {
     background: $white;
-    background-image: url('../images/sample_avatar_02.png');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -240,6 +239,26 @@ section.menu {
       position: absolute;
       right: -6px;
       top: -6px;
+    }
+
+    &.sample-01 {
+      background-image: url('../images/sample_avatar_01.png');
+    }
+
+    &.sample-02 {
+      background-image: url('../images/sample_avatar_02.png');
+    }
+
+    &.sample-03 {
+      background-image: url('../images/sample_avatar_03.png');
+    }
+
+    &.sample-04 {
+      background-image: url('../images/sample_avatar_04.png');
+    }
+
+    &.sample-05 {
+      background-image: url('../images/sample_avatar_05.png');
     }
   }
 
