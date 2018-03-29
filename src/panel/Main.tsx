@@ -79,6 +79,17 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                     render={() => (
                       <Invites
                         invitesList={this.props.account_info.referrals || [] as Referral[]}
+                        onNewInvite={(req: API.RequestNewInvite) => {
+                          this.client.SendInvite(this.props.session, req, (r, e) => {
+                            if (this.handleResult(r, e)) {
+                              this.setState({
+                                alert: 'La invitación ha sido enviada con éxito',
+                                alertLevel: 'success'
+                              });
+                              this.loadAccountInfo();
+                            }
+                          });
+                        }}
                       />
                     )}
                   />

@@ -34,6 +34,13 @@ interface RequestAccountRegister {
   referral?: Referral;
 }
 
+// Send a new invite
+interface RequestNewInvite {
+  name: string;
+  email: string;
+  message: string;
+}
+
 // Callback handler for API client methods
 type ClientCallback = (r: Response | null, error: string | null) => void;
 
@@ -72,6 +79,10 @@ class Client {
     this.request('/account/update', cb, data, session);
   }
 
+  public SendInvite(session: Session, data: RequestNewInvite, cb: ClientCallback) {
+    this.request('/invite', cb, data, session);
+  }
+
   private request(path: string, cb: ClientCallback, data?: object | null, session?: Session) {
     // Build API request
     let req: Request = {} as Request;
@@ -102,5 +113,6 @@ export {
   Client,
   ClientCallback,
   RequestSession,
-  RequestAccountRegister
+  RequestAccountRegister,
+  RequestNewInvite
 };

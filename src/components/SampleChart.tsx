@@ -114,7 +114,7 @@ class SampleChart extends React.Component<Props, State> {
       <div>
         <p>
           Divisa seleccionada: <span className="badge badge-secondary">{this.state.asset}</span> /
-          Precio actual: <span className="badge badge-success">${this.state.currentPrice || 0} USD</span> /
+          Precio actual: <span className="badge badge-success">${this.state.currentPrice || 0} USD</span>
         </p>
         <div className="form-row">
           <div className="form-group col-md-4">
