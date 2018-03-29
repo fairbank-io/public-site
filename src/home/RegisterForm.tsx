@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as jQuery from 'jquery';
 import * as API from 'state/api';
+import { Referral } from 'state/data';
 import * as CryptoJS from 'crypto-js';
 
 // UI
@@ -144,8 +145,21 @@ class RegisterForm extends React.Component<ComponentProps, ComponentState> {
     // Run API request
     let req: API.RequestAccountRegister = {
       email: email,
-      password: CryptoJS.SHA256(password).toString()
+      password: CryptoJS.SHA256(password).toString(),
     };
+
+    // Load referral information
+    let urlParams: string = window.location.search.slice(1).split('#')[0];
+    if (urlParams) {
+      let referral: Referral = {} as Referral;
+      urlParams.split('&').map(function (k: string) {
+        if (k.split('=')[0] === 'invite') {
+          referral.code = k.split('=')[1];
+          req.referral = referral;
+        }
+      });
+    }
+
     this.client.Register(req, (r, e) => {
       // Failed requests
       if (e) {
