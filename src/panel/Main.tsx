@@ -25,6 +25,7 @@ interface ComponentProps extends ActionDispatcher, RouteComponentProps<void> {
 interface ComponentState {
   alert: string;
   alertLevel: string;
+  showAlert: boolean;
 }
 
 class PanelMain extends React.Component<ComponentProps, ComponentState> {
@@ -41,9 +42,11 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     super(props);
     this.client = new API.Client();
     this.logout = this.logout.bind(this);
+    this.onAlertClose = this.onAlertClose.bind(this);
     this.state = {
       alert: '',
-      alertLevel: 'warning'
+      alertLevel: 'warning',
+      showAlert: false
     };
   }
 
@@ -72,7 +75,9 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
           <div className="container">
             <div className="row">
               <div className="col-md-10 offset-md-1">
-                <Alert type={this.state.alertLevel}>{this.state.alert}</Alert>
+                { this.state.showAlert &&
+                  <Alert type={this.state.alertLevel} onClose={this.onAlertClose}>{this.state.alert}</Alert>
+                }
                 <Switch>
                   <Route
                     path={this.props.match.url + '/invites'}
@@ -84,7 +89,8 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                             if (this.handleResult(r, e)) {
                               this.setState({
                                 alert: 'La invitación ha sido enviada con éxito',
-                                alertLevel: 'success'
+                                alertLevel: 'success',
+                                showAlert: true
                               });
                               this.loadAccountInfo();
                             }
@@ -123,7 +129,8 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                             if (this.handleResult(r, e)) {
                               this.setState({
                                 alert: 'Tu información ha sido actualizada con exitosamente',
-                                alertLevel: 'success'
+                                alertLevel: 'success',
+                                showAlert: true
                               });
                               this.loadAccountInfo();
                             }
@@ -176,7 +183,8 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     if (error) {
       this.setState({
         alert: 'Error Interno: ' + error,
-        alertLevel: 'danger'
+        alertLevel: 'danger',
+        showAlert: true
       });
       return false;
     }
@@ -185,7 +193,8 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     if (r && !r.ok) {
       this.setState({
         alert: r.desc,
-        alertLevel: 'warning'
+        alertLevel: 'warning',
+        showAlert: true
       });
       return false;
     }
@@ -196,6 +205,12 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     }
 
     return false;
+  }
+
+  private onAlertClose(): void {
+    this.setState({
+      showAlert: false
+    });
   }
 }
 

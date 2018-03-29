@@ -5,6 +5,7 @@ import * as API from 'state/api';
 // UI
 import SimpleModal from 'components/SimpleModal';
 import InviteForm from 'panel/InviteForm';
+import InvitesTable from 'panel/InvitesTable';
 
 // Component properties
 interface ComponentProps {
@@ -38,36 +39,7 @@ class Invites extends React.Component<ComponentProps, ComponentState> {
       );
     } else {
       contents = (
-        <table className="table table-striped table-hover">
-          <thead>
-          <tr>
-            <th>#</th>
-            <th>Destinatario</th>
-            <th className="d-none d-md-table-cell">Código</th>
-            <th>Estado</th>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            this.props.invitesList.map(function (k: Referral, i: number) {
-              return (
-                <tr key={k.code}>
-                  <td>{i + 1}</td>
-                  <td>{k.email}</td>
-                  <td className="d-none d-md-table-cell">{k.code}</td>
-                  <td>
-                    {
-                      k.accepted ?
-                      <span className="badge badge-success">Activa</span> :
-                      <span className="badge badge-danger">Pendiente</span>
-                    }
-                  </td>
-                </tr>
-              );
-            })
-          }
-          </tbody>
-        </table>
+        <InvitesTable invitesList={this.props.invitesList} />
       );
     }
 

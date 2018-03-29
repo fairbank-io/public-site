@@ -4,6 +4,7 @@ import * as jQuery from 'jquery';
 // Component properties
 interface ComponentProps {
   type: string;
+  onClose?: () => void;
 }
 
 // Component state
@@ -32,9 +33,8 @@ class Alert extends React.Component<ComponentProps, ComponentState> {
   }
 
   public render(): JSX.Element {
-    let alertType: string = 'alert alert-' + this.props.type;
     return (
-      <div className={alertType} ref={(el) => this.holder = el}>
+      <div className={'alert alert-' + this.props.type} ref={(el) => this.holder = el}>
         <button type="button" className="close" onClick={this.close}>
           <span>&times;</span>
         </button>
@@ -45,7 +45,11 @@ class Alert extends React.Component<ComponentProps, ComponentState> {
 
   private close(): void {
     if (this.holder) {
-      jQuery(this.holder).slideUp();
+      jQuery(this.holder).slideUp(() => {
+        if (this.props.onClose) {
+          this.props.onClose();
+        }
+      });
     }
   }
 }
