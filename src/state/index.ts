@@ -4,13 +4,19 @@ import { Action, ActionType } from 'state/actions';
 
 // Base application state definition
 interface ApplicationState {
-  session: Session;
-  account_info: AccountInfo;
+  session: Session | null;
+  account_info: AccountInfo | null;
 }
+
+// Default empty state
+const emptyState: ApplicationState = {
+  session: null,
+  account_info: null
+};
 
 // Load initial application state
 function getInitialState(): ApplicationState {
-  let state: ApplicationState = {} as ApplicationState;
+  let state: ApplicationState = emptyState;
   let storedState: string | null = window.sessionStorage.getItem('application_state');
   if (storedState) {
     state = JSON.parse(storedState);
@@ -30,7 +36,7 @@ function reducer(state: ApplicationState, action: Action): ApplicationState {
       newState.session = action.data as Session;
       break;
     case ActionType.LOGOUT:
-      newState = {} as ApplicationState;
+      newState = emptyState;
       break;
     case ActionType.ACCOUNT_INFO:
       newState.account_info = action.data as AccountInfo;

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as redux from 'react-redux';
-import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
-import { Action, ActionType, ActionDispatcher } from 'state/actions';
+import { Route, RouteComponentProps } from 'react-router-dom';
+import * as API from 'state/api';
+import { ActionType, ActionDispatcher } from 'state/actions';
 import { Session } from 'state/data';
 import { ApplicationState } from 'state';
 
@@ -13,25 +14,34 @@ import LoginForm from 'home/LoginForm';
 
 // Component properties
 interface ComponentProps extends ActionDispatcher, RouteComponentProps<void> {
-  session: Session;
+  session: Session | null;
 }
 
 // Component state
 interface ComponentState {}
 
 class HomeMain extends React.Component<ComponentProps, ComponentState> {
+  client: API.Client;
+
   static stateToProps (state: ApplicationState): Partial<ComponentProps> {
     return {
       session: state.session
     };
   }
 
-  public render(): JSX.Element {
-    // Go to the user panel
-    if (this.props.session) {
-      return ( <Redirect to={'/panel'} /> );
-    }
+  constructor(props: ComponentProps) {
+    super(props);
+    this.client = new API.Client();
+  }
 
+  componentDidMount(): void {
+    // With active session redirect user to panel
+    if (this.props.session) {
+      this.props.history.push('/panel');
+    }
+  }
+
+  public render(): JSX.Element {
     return (
       <section>
         <Route
@@ -49,16 +59,30 @@ class HomeMain extends React.Component<ComponentProps, ComponentState> {
           render={() => (
             <SimpleModal title={'Iniciar Sesión'} onHide={() => this.props.history.push('/')}>
               <LoginForm
-                onNewSession={(s) => {
-                  // Dispatch action
-                  let ac: Action = {
+                onNewSession={(session) => {
+                  // Set session
+                  this.props.dispatch({
                     type: ActionType.LOGIN,
-                    data: s
-                  };
-                  this.props.dispatch(ac);
+                    data: session
+                  });
 
-                  // Load panel
-                  this.props.history.push('/panel');
+                  // Load account info
+                  this.client.AccountInfo(session, (r, e) => {
+                    if (e) {
+                      // Handle error
+                      return;
+                    }
+
+                    if (r && r.ok) {
+                      this.props.dispatch({
+                        type: ActionType.ACCOUNT_INFO,
+                        data: r.data
+                      });
+
+                      // Load panel
+                      this.props.history.push('/panel' + this.props.location.search);
+                    }
+                  });
                 }}
               />
             </SimpleModal>

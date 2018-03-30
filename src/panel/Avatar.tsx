@@ -2,14 +2,28 @@ import * as React from 'react';
 
 // Component properties
 interface ComponentProps {
-  readonly counter?: number;
   readonly onClick: () => void;
+  readonly counter?: number;
+  readonly pic?: string;
   readonly targetRef?: (e: Element | null ) => void;
 }
 
-class Avatar extends React.Component<ComponentProps, {}> {
+// Component state
+interface ComponentState {
+  pic: string;
+}
+
+class Avatar extends React.Component<ComponentProps, ComponentState> {
+  static defaultProps: Partial<ComponentProps> = {
+    counter: 0,
+    pic: ''
+  };
+
   constructor(props: ComponentProps) {
     super(props);
+    this.state = {
+      pic: 'avatar sample-0' + (Math.floor(Math.random() * 5) + 1)
+    };
   }
 
   public render(): JSX.Element {
@@ -19,10 +33,8 @@ class Avatar extends React.Component<ComponentProps, {}> {
       badge = <span className="badge badge-alert">{this.props.counter}</span>;
     }
 
-    // Sample avatar
-    let sample: string = 'avatar sample-0' + (Math.floor(Math.random() * 5) + 1);
     return (
-      <span className={sample} onClick={this.props.onClick}>
+      <span className={this.state.pic} onClick={this.props.onClick}>
         {badge}
       </span>
     );

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as redux from 'react-redux';
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { ApplicationState } from 'state';
-import { Action, ActionType, ActionDispatcher } from 'state/actions';
+import { ActionType, ActionDispatcher } from 'state/actions';
 import { AccountDetails, AccountInfo, Referral, Notification, Session } from 'state/data';
 import * as API from 'state/api';
 
@@ -17,8 +17,8 @@ import Transactions from 'panel/Transactions';
 
 // Component properties
 interface ComponentProps extends ActionDispatcher, RouteComponentProps<void> {
-  session: Session;
-  account_info: AccountInfo;
+  session: Session | null;
+  accountInfo: AccountInfo | null;
 }
 
 // Component state
@@ -34,7 +34,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
   static stateToProps (state: ApplicationState): Partial<ComponentProps> {
     return {
       session: state.session,
-      account_info: state.account_info
+      accountInfo: state.account_info
     };
   }
 
@@ -51,23 +51,23 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
   }
 
   componentWillMount(): void {
-    // Load data if not available yet
-    if (this.props.session && !this.props.account_info) {
-      this.loadAccountInfo();
+    if (!this.props.session) {
+      this.props.history.push('/home/login' + this.props.location.search);
+      return;
     }
   }
 
-  public render(): JSX.Element | null {
-    // Go home
-    if (!this.props.session) {
-      return ( <Redirect to={'/'} /> );
-    }
+  componentDidMount(): void {
+    this.handleGetParams();
+  }
 
-    // Wait for data to render
-    if (!this.props.account_info) {
-      return null;
-    }
+  componentDidUpdate(): void {
+    this.handleGetParams();
+  }
 
+  public render(): JSX.Element {
+    let info: AccountInfo = this.props.accountInfo || {} as AccountInfo;
+    let session: Session = this.props.session || {} as Session;
     return (
       <section>
         <Header notificationsCounter={0} onLogoutRequest={this.logout} />
@@ -83,15 +83,11 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                     path={this.props.match.url + '/invites'}
                     render={() => (
                       <Invites
-                        invitesList={this.props.account_info.referrals || [] as Referral[]}
+                        invitesList={info.referrals || [] as Referral[]}
                         onNewInvite={(req: API.RequestNewInvite) => {
-                          this.client.SendInvite(this.props.session, req, (r, e) => {
-                            if (this.handleResult(r, e)) {
-                              this.setState({
-                                alert: 'La invitación ha sido enviada con éxito',
-                                alertLevel: 'success',
-                                showAlert: true
-                              });
+                          this.client.SendInvite(session, req, (r, e) => {
+                            if (this.validateResult(r, e)) {
+                              this.showAlert('success', 'La invitación ha sido enviada con éxito');
                               this.loadAccountInfo();
                             }
                           });
@@ -115,7 +111,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                     path={this.props.match.url + '/transactions'}
                     render={() => (
                       <Transactions
-                        transactionsList={this.props.account_info.transactions || [] as Transactions[]}
+                        transactionsList={info.transactions || [] as Transactions[]}
                       />
                     )}
                   />
@@ -123,15 +119,11 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                     path={this.props.match.url}
                     render={() => (
                       <GeneralDetails
-                        details={this.props.account_info.details || {} as AccountDetails}
+                        details={info.details || {} as AccountDetails}
                         onUpdateRequest={(d: AccountDetails) => {
-                          this.client.AccountUpdate(this.props.session, d, (r, e) => {
-                            if (this.handleResult(r, e)) {
-                              this.setState({
-                                alert: 'Tu información ha sido actualizada con exitosamente',
-                                alertLevel: 'success',
-                                showAlert: true
-                              });
+                          this.client.AccountUpdate(session, d, (r, e) => {
+                            if (this.validateResult(r, e)) {
+                              this.showAlert('success', 'Tu información ha sido actualizada con exitosamente');
                               this.loadAccountInfo();
                             }
                           });
@@ -149,28 +141,34 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
   }
 
   private loadAccountInfo(): void {
+    if (!this.props.session) {
+      return;
+    }
+
     this.client.AccountInfo(this.props.session, (r, e) => {
-      if (this.handleResult(r, e)) {
+      if (this.validateResult(r, e)) {
         if (r && r.ok) {
-          let ac: Action = {
+          this.props.dispatch({
             type: ActionType.ACCOUNT_INFO,
             data: r.data
-          };
-          this.props.dispatch(ac);
+          });
         }
       }
     });
   }
 
   private logout(): void {
+    if (!this.props.session) {
+      return;
+    }
+
     this.client.Logout(this.props.session, (r, e) => {
-      if (this.handleResult(r, e)) {
+      if (this.validateResult(r, e)) {
         // Dispatch action
-        let ac: Action = {
+        this.props.dispatch({
           type: ActionType.LOGOUT,
           data: {}
-        };
-        this.props.dispatch(ac);
+        });
 
         // Go home
         this.props.history.push('/');
@@ -178,39 +176,74 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     });
   }
 
-  private handleResult(r: API.Response | null, error: string | null): boolean {
+  private validateResult(r: API.Response | null, error: string | null): boolean {
     // Failed requests
     if (error) {
-      this.setState({
-        alert: 'Error Interno: ' + error,
-        alertLevel: 'danger',
-        showAlert: true
-      });
+      this.showAlert('danger', 'Error Interno: ' + error);
       return false;
     }
 
     // Bad results
     if (r && !r.ok) {
-      this.setState({
-        alert: r.desc,
-        alertLevel: 'warning',
-        showAlert: true
-      });
+      this.showAlert('warning', r.desc);
       return false;
     }
 
     // All good!
-    if (r && r.ok) {
-      return true;
-    }
-
-    return false;
+    return ( r !== null && r.ok);
   }
 
   private onAlertClose(): void {
     this.setState({
       showAlert: false
     });
+  }
+
+  private handleGetParams(): void {
+    if (!this.props.session) {
+      return;
+    }
+
+    if (!this.props.location.search) {
+      return;
+    }
+
+    // Get params as an object
+    let params: object = {};
+    let urlParams: string = window.location.search.slice(1).split('#')[0];
+    if (urlParams) {
+      urlParams.split('&').map( (k: string) => {
+        params[k.split('=')[0]] = k.split('=')[1];
+      });
+    }
+
+    // Remove URL parameters
+    window.history.replaceState({}, document.title, this.props.location.pathname);
+
+    // Validate account
+    if (params.hasOwnProperty('code') && params.hasOwnProperty('address')) {
+      let req: API.RequestActivation = {
+        source: 'email',
+        data: params
+      };
+
+      this.client.AccountValidation(this.props.session, req, (r, e) => {
+        if (this.validateResult(r, e)) {
+          this.showAlert('success', 'Tu cuenta ha sido activada exitosamente');
+        }
+      });
+    }
+  }
+
+  private showAlert(level: string, message: string, force?: boolean) {
+    this.setState({
+      alert: message,
+      alertLevel: level,
+      showAlert: true
+    });
+
+    // Some alerts require to force a render cycle =/
+    this.forceUpdate();
   }
 }
 

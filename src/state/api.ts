@@ -41,6 +41,12 @@ interface RequestNewInvite {
   message: string;
 }
 
+// Submit an activation code for validation
+interface RequestActivation {
+  source: string;
+  data: object;
+}
+
 // Callback handler for API client methods
 type ClientCallback = (r: Response | null, error: string | null) => void;
 
@@ -79,6 +85,10 @@ class Client {
     this.request('/account/update', cb, data, session);
   }
 
+  public AccountValidation(session: Session, data: RequestActivation, cb: ClientCallback) {
+    this.request('/account/validate', cb, data, session);
+  }
+
   public SendInvite(session: Session, data: RequestNewInvite, cb: ClientCallback) {
     this.request('/invite', cb, data, session);
   }
@@ -114,5 +124,6 @@ export {
   ClientCallback,
   RequestSession,
   RequestAccountRegister,
+  RequestActivation,
   RequestNewInvite
 };
