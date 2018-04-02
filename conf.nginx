@@ -24,13 +24,21 @@ http {
   server {
     listen         80;
     server_name    www.fairbank.io;
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+
     if ($http_x_forwarded_proto != "https") {
       rewrite ^(.*)$ https://$server_name$REQUEST_URI permanent;
     }
 
     location / {
-      root   /usr/share/nginx/html;
-      index  index.html index.htm;
+      try_files $uri /index.html;
     }
+  }
+
+  server {
+    listen         80;
+    server_name    fairbank.io;
+    rewrite ^(.*)$ https://www.fairbank.io$REQUEST_URI permanent;
   }
 }
