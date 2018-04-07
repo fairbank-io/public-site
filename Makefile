@@ -21,5 +21,9 @@ start: ## Run dev server
 deps: ## Install required dependencies
 	yarn install
 
+deps-update: ## Update dependencies
+	ncu -ua
+	yarn install
+
 help: ## Display available make targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[33m%-16s\033[0m %s\n", $$1, $$2}'
