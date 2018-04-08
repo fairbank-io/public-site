@@ -55,7 +55,7 @@ class Client {
 
   constructor() {
     this.handler = axios.create({
-      baseURL:   'http://localhost:5559',
+      baseURL:   (process.env.NODE_ENV === 'production') ? 'https://api.fairbank.io' : 'http://localhost:5559',
       timeout:   5000,
       httpAgent: 'public-site'
     });
