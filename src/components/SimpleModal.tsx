@@ -6,6 +6,9 @@ interface ComponentProps {
   // Main title for the modal window
   title: string;
 
+  // Size: regular, lg, sm
+  size?: string;
+
   // Animation duration in ms
   animationDuration?: number;
 
@@ -34,6 +37,7 @@ interface ComponentState {}
 class SimpleModal extends React.Component<ComponentProps, ComponentState> {
   // Default properties
   static defaultProps: Partial<ComponentProps> = {
+    size: 'regular',
     withHeader: true,
     withFooter: false,
     animationDuration: 250,
@@ -111,9 +115,14 @@ class SimpleModal extends React.Component<ComponentProps, ComponentState> {
       );
     }
 
+    // Get size marker
+    let styles: string[] = ['modal-dialog'];
+    if (this.props.size !== 'regular') {
+      styles.push('modal-' + this.props.size);
+    }
     return (
       <div className="modal modal-open" ref={(el) => this.overlay = el}>
-        <div className="modal-dialog" ref={(el) => this.dialog = el}>
+        <div className={styles.join(' ')} ref={(el) => this.dialog = el}>
           <div className="modal-content">
             {header}
             <div className="modal-body">
