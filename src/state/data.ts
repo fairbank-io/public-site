@@ -7,7 +7,7 @@ interface Extension {
 
 // Represent an attached document to a related element
 interface Document {
-  uuid: string;
+  uuid?: string;
   mime: string;
   name: string;
   description: string;
@@ -46,19 +46,18 @@ interface Referral {
 
 // Common transaction record
 interface Transaction {
-  uuid: string;
-  time: Date;
-  account_uuid: string;
+  time?: Date;
+  account_uuid?: string;
   method: string;
   description: string;
   amount: number;
+  fees: number;
   currency: string;
   extensions?: Extension[];
 }
 
 // Credit/Debit card representation
 interface Card {
-  uuid: string;
   name: string;
   number: string;
   month: string;
@@ -70,7 +69,6 @@ interface Card {
 
 // Tokenized representation of a given credit/debit card
 interface CardToken {
-  uuid: string;
   code: string;
   provider: string;
   card_digits: string;

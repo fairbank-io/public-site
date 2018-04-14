@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import {
   Session,
-  Referral, AccountDetails
+  Referral, AccountDetails, Transaction
 } from 'state/data';
 
 // Request's dispatched to the platform's backend
@@ -91,6 +91,10 @@ class Client {
 
   public SendInvite(session: Session, data: RequestNewInvite, cb: ClientCallback) {
     this.request('/invite', cb, data, session);
+  }
+
+  public NewTransaction(session: Session, data: Transaction, cb: ClientCallback) {
+    this.request('/tx', cb, data, session);
   }
 
   private request(path: string, cb: ClientCallback, data?: object | null, session?: Session) {

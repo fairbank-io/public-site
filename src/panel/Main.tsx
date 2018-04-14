@@ -1,10 +1,17 @@
 import * as React from 'react';
 import * as redux from 'react-redux';
+import * as API from 'state/api';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { ApplicationState } from 'state';
 import { ActionType, ActionDispatcher } from 'state/actions';
-import { AccountDetails, AccountInfo, Referral, Notification, Session } from 'state/data';
-import * as API from 'state/api';
+import {
+  AccountDetails,
+  AccountInfo,
+  Referral,
+  Notification,
+  Session,
+  Transaction
+} from 'state/data';
 
 // UI
 import Alert from 'components/Alert';
@@ -112,6 +119,14 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                     render={() => (
                       <Transactions
                         transactionsList={info.transactions || [] as Transactions[]}
+                        onNewTx={(tx: Transaction) => {
+                          this.client.NewTransaction(session, tx, (r, e) => {
+                            if (this.validateResult(r, e)) {
+                              this.showAlert('success', 'La transacción ha sido procesada con éxito');
+                              this.loadAccountInfo();
+                            }
+                          });
+                        }}
                       />
                     )}
                   />

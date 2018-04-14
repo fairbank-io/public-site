@@ -79,7 +79,7 @@ div.modal {
   }
 
   div.modal-dialog {
-    margin-top: 10%;
+    margin-top: 6%;
   }
 
   div.form-buttons {
@@ -133,6 +133,11 @@ button {
 
 table.table {
   margin-top: 1.5rem;
+}
+
+form div.inline-input {
+  padding-right: 2%;
+  width: 50%;
 }
 
 // Home screen

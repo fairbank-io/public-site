@@ -226,13 +226,12 @@ class TransactionForm extends React.Component<ComponentProps, ComponentState> {
       working: true,
     });
 
-    // Collect data and adjust amount
+    // Collect data and calculate amount / fees
     let fd: FormData = utils.serializeFormData(jQuery(this.form).serializeArray()) as FormData;
     let amount: number = Number(fd.amount);
-    if (this.props.addFees) {
-      amount += (amount * .035) + 0.5;
-    }
+    let fees: number = (amount * .035) + 0.5;
     amount = Math.round(Number(amount.toFixed(2)) * 100);
+    fees = Math.round(Number(fees.toFixed(2)) * 100);
 
     // Generate card token
     this.state.stripe.createToken(this.cardDetails, {
@@ -252,6 +251,7 @@ class TransactionForm extends React.Component<ComponentProps, ComponentState> {
       // Delegate tx
       this.props.onSubmit({
         amount: amount,
+        fees: fees,
         currency: fd.currency,
         description: fd.description,
         method: fd.method,
