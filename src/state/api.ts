@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import {
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError
+} from 'axios';
 import {
   Session,
-  Referral, AccountDetails, Transaction
+  Referral,
+  AccountDetails,
+  Transaction
 } from 'state/data';
 
 // Request's dispatched to the platform's backend
@@ -17,6 +23,9 @@ interface Response {
   desc: string;
   data: object;
 }
+
+// Callback handler for API client methods
+type ClientCallback = (r: Response | null, error: string | null) => void;
 
 // ---- Basic Requests ---- //
 
@@ -46,9 +55,6 @@ interface RequestActivation {
   source: string;
   data: object;
 }
-
-// Callback handler for API client methods
-type ClientCallback = (r: Response | null, error: string | null) => void;
 
 class Client {
   handler: AxiosInstance;

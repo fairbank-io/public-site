@@ -243,7 +243,8 @@ class TransactionForm extends React.Component<ComponentProps, ComponentState> {
       if (res.error || !res.token) {
         this.setState({
           alert: 'Ocurrio un error al validar tu tarjeta, verifica tus datos.',
-          alertLevel: 'danger'
+          alertLevel: 'danger',
+          working: false
         });
         return;
       }
