@@ -21,6 +21,9 @@ class Alert extends React.Component<ComponentProps, ComponentState> {
   componentDidMount(): void {
     if (this.holder) {
       jQuery(this.holder).hide();
+      if (this.props.children) {
+        jQuery(this.holder).slideDown();
+      }
     }
   }
 
