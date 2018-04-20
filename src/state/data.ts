@@ -7,13 +7,14 @@ interface Extension {
 
 // Represent an attached document to a related element
 interface Document {
-  uuid?: string;
-  mime: string;
   name: string;
-  description: string;
-  url: string;
-  contents: string;
+  mime: string;
+  path: string;
+  status: string;
   upload_date: Date;
+  contents: string;
+  description: string;
+  valid_types: string[];
   extensions?: Extension[];
 }
 
@@ -78,7 +79,7 @@ interface CardToken {
 
 // General account details
 interface AccountDetails {
-  name?: string;
+  name: string;
   last_name: string;
   address: Address;
   additional_details: object;
@@ -91,6 +92,7 @@ interface AccountInfo {
   status: string;
   transactions: Transaction[];
   referrals: Referral[];
+  documents: Document[];
   extensions?: Extension[];
 }
 

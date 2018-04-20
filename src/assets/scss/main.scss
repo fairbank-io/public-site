@@ -42,6 +42,10 @@ span.badge {
   &.badge-ok {
     background-color: $green;
   }
+
+  &.badge-btn {
+    cursor: pointer;
+  }
 }
 
 a.logo {

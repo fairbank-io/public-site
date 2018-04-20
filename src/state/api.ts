@@ -56,6 +56,12 @@ interface RequestActivation {
   data: object;
 }
 
+// Upload a file to storage
+interface RequestUpload {
+  name: string;
+  contents: File;
+}
+
 class Client {
   handler: AxiosInstance;
 
@@ -103,6 +109,26 @@ class Client {
     this.request('/tx', cb, data, session);
   }
 
+  public UploadFile(session: Session, req: RequestUpload, cb: ClientCallback) {
+    // Prepare form data
+    let fd = new FormData();
+    fd.append('file_name', req.name);
+    fd.append('file_contents', req.contents);
+    fd.append('account_uuid', session.account_uuid);
+    fd.append('session_token', session.token);
+
+    // Execute request
+    this.handler.request({
+      method: 'post',
+      url:    '/upload',
+      data:   fd
+    }).then(function (r: AxiosResponse) {
+      cb(r.data as Response, null);
+    }).catch(function(error: AxiosError) {
+      cb(null, error.message);
+    });
+  }
+
   private request(path: string, cb: ClientCallback, data?: object | null, session?: Session) {
     // Build API request
     let req: Request = {} as Request;
@@ -135,5 +161,6 @@ export {
   RequestSession,
   RequestAccountRegister,
   RequestActivation,
-  RequestNewInvite
+  RequestNewInvite,
+  RequestUpload
 };

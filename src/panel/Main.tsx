@@ -49,6 +49,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     super(props);
     this.client = new API.Client();
     this.logout = this.logout.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
     this.onAlertClose = this.onAlertClose.bind(this);
     this.state = {
       alert: '',
@@ -135,6 +136,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                     render={() => (
                       <GeneralDetails
                         details={info.details || {} as AccountDetails}
+                        documents={info.documents}
                         onUpdateRequest={(d: AccountDetails) => {
                           this.client.AccountUpdate(session, d, (r, e) => {
                             if (this.validateResult(r, e)) {
@@ -143,6 +145,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
                             }
                           });
                         }}
+                        onUploadRequest={this.uploadFile}
                       />
                     )}
                   />
@@ -214,6 +217,14 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     });
   }
 
+  private showAlert(level: string, message: string) {
+    this.setState({
+      alert: message,
+      alertLevel: level,
+      showAlert: true
+    });
+  }
+
   private handleGetParams(): void {
     if (!this.props.session) {
       return;
@@ -250,15 +261,24 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     }
   }
 
-  private showAlert(level: string, message: string, force?: boolean) {
-    this.setState({
-      alert: message,
-      alertLevel: level,
-      showAlert: true
-    });
+  private uploadFile(name: string, f: File): void {
+    if (!this.props.session) {
+      return;
+    }
 
-    // Some alerts require to force a render cycle =/
-    this.forceUpdate();
+    if (f.size / 1000 > 500 ) {
+      this.showAlert('danger', 'El archivo seleccionado excede el tamaño máximo permitido de 500kb');
+      return;
+    }
+
+    this.client.UploadFile(this.props.session, {name: name, contents: f}, (r, e) => {
+      if (this.validateResult(r, e)) {
+        if (r && r.ok) {
+          this.showAlert('success', 'El archivo ha sido guardado exitosamente');
+          this.loadAccountInfo();
+        }
+      }
+    });
   }
 }
 
