@@ -2,6 +2,21 @@ import * as React from 'react';
 import { ChartPoint, Chart } from 'chart.js';
 import axios from 'axios';
 
+// Component properties
+interface ComponentProps {
+  readonly asset: Asset;
+  readonly label: string;
+  readonly period?: Period;
+}
+
+// Component state
+interface ComponentState {
+  asset: Asset;
+  data: Array<ChartPoint>;
+  period: Period;
+  currentPrice: number;
+}
+
 enum Period {
   HOUR  = 'hour',
   DAY   = 'day',
@@ -16,19 +31,6 @@ enum Asset {
   LTC  = 'LTC'
 }
 
-interface Props {
-  readonly asset: Asset;
-  readonly label: string;
-  readonly period?: Period;
-}
-
-interface State {
-  asset: Asset;
-  data: Array<ChartPoint>;
-  period: Period;
-  currentPrice: number;
-}
-
 interface APIQuery {
   fsym: string;
   tsym: string;
@@ -41,7 +43,7 @@ interface APIDataItem {
   high: number;
 }
 
-class SampleChart extends React.Component<Props, State> {
+class SampleChart extends React.Component<ComponentProps, ComponentState> {
   private canvas: HTMLCanvasElement | null;
   private chart: Chart;
   private baseUrl: string = 'https://min-api.cryptocompare.com/data/';
@@ -80,13 +82,13 @@ class SampleChart extends React.Component<Props, State> {
     }
   };
 
-  constructor(props: Props) {
+  constructor(props: ComponentProps) {
     super(props);
     this.state = {
-      currentPrice: 0,
       asset: this.props.asset,
-      period: this.props.period || Period.WEEK,
-      data: []
+      data: [],
+      period: this.props.period ? this.props.period : Period.WEEK,
+      currentPrice: 0
     };
     this.getData = this.getData.bind(this);
   }
@@ -101,7 +103,7 @@ class SampleChart extends React.Component<Props, State> {
     this.chart.destroy();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: ComponentProps) {
     if (nextProps.asset !== this.props.asset ) {
       this.setState({asset: nextProps.asset});
       this.getCurrentPrice(nextProps.asset);
@@ -120,7 +122,7 @@ class SampleChart extends React.Component<Props, State> {
           <div className="form-group col-md-4">
             <label>Periodo Seleccionado</label>
             <select
-              value={this.state.period}
+              defaultValue={this.state.period}
               onChange={(e) => this.getData(this.state.asset, e.target.value as Period)}
               className="custom-select"
             >
@@ -178,6 +180,19 @@ class SampleChart extends React.Component<Props, State> {
         return;
     }
 
+    let marker: string = 'data_' + a + '_' + p;
+    let data = window.sessionStorage.getItem(marker);
+    if (data) {
+      this.setState(
+        {
+          period: p,
+          data: JSON.parse(data)
+        },
+        () => this.updateChart()
+      );
+      return;
+    }
+
     let points: Array<ChartPoint> = [];
     axios.get(this.baseUrl + url, {params: params})
       .then((r) => {
@@ -188,6 +203,7 @@ class SampleChart extends React.Component<Props, State> {
             y: el.high
           });
         });
+        window.sessionStorage.setItem(marker, JSON.stringify(points));
 
         // Update state and render chart
         this.setState({
@@ -199,12 +215,20 @@ class SampleChart extends React.Component<Props, State> {
   }
 
   private getCurrentPrice(asset: Asset) {
+    if (window.sessionStorage.getItem('price_' + asset)) {
+      this.setState({
+        currentPrice: Number(window.sessionStorage.getItem('price_' + asset))
+      });
+      return;
+    }
+
     axios.get(this.baseUrl + 'price', {
       params: {
         fsym: asset,
         tsyms: 'USD'
       }
     }).then((r) => {
+      window.sessionStorage.setItem('price_' + asset, r.data.USD);
       this.setState({currentPrice: r.data.USD});
     });
   }
@@ -222,7 +246,7 @@ class SampleChart extends React.Component<Props, State> {
   }
 }
 
-// Module export
+// Module exports
 export {
   SampleChart,
   Period,
