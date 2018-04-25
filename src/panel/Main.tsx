@@ -7,8 +7,9 @@ import { ActionType, ActionDispatcher } from 'state/actions';
 import {
   AccountDetails,
   AccountInfo,
-  Referral,
+  Document,
   Notification,
+  Referral,
   Session,
   Transaction
 } from 'state/data';
@@ -33,6 +34,7 @@ interface ComponentState {
   alert: string;
   alertLevel: string;
   showAlert: boolean;
+  avatar: string;
 }
 
 class PanelMain extends React.Component<ComponentProps, ComponentState> {
@@ -54,7 +56,8 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     this.state = {
       alert: '',
       alertLevel: 'warning',
-      showAlert: false
+      showAlert: false,
+      avatar: ''
     };
   }
 
@@ -67,6 +70,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
 
   componentDidMount(): void {
     this.handleGetParams();
+    this.loadAvatar();
   }
 
   componentDidUpdate(): void {
@@ -78,7 +82,7 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
     let session: Session = this.props.session || {} as Session;
     return (
       <section>
-        <Header notificationsCounter={0} onLogoutRequest={this.logout} />
+        <Header avatar={this.state.avatar} notificationsCounter={0} onLogoutRequest={this.logout} />
         <section className="content panel">
           <div className="container">
             <div className="row">
@@ -171,6 +175,42 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
             data: r.data
           });
         }
+      }
+    });
+  }
+
+  private loadAvatar(): void {
+    if (!this.props.accountInfo) {
+      return;
+    }
+
+    // Use existing data
+    let storedAvatar = window.sessionStorage.getItem('avatar');
+    if (storedAvatar) {
+      this.setState({
+        avatar: storedAvatar
+      });
+      return;
+    }
+
+    // If no previous session data is present but a file is set, request it from the network
+    this.props.accountInfo.documents.forEach((d) => {
+      if (d.name === 'io.fairbank.avatar') {
+        if (!this.props.session) {
+          return;
+        }
+        this.client.GetFile(this.props.session, d, (r, e) => {
+          if (e) {
+            return;
+          }
+          if (r) {
+            let doc = r.data as Document;
+            window.sessionStorage.setItem('avatar', 'data:' + doc.mime + ';base64,' + doc.contents);
+            this.setState({
+              avatar: 'data:' + doc.mime + ';base64,' + doc.contents
+            });
+          }
+        });
       }
     });
   }
@@ -275,6 +315,9 @@ class PanelMain extends React.Component<ComponentProps, ComponentState> {
       if (this.validateResult(r, e)) {
         if (r && r.ok) {
           this.showAlert('success', 'El archivo ha sido guardado exitosamente');
+          if (name === 'io.fairbank.avatar') {
+            this.loadAvatar();
+          }
           this.loadAccountInfo();
         }
       }

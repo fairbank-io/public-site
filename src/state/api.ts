@@ -5,9 +5,10 @@ import {
   AxiosError
 } from 'axios';
 import {
-  Session,
-  Referral,
   AccountDetails,
+  Document,
+  Referral,
+  Session,
   Transaction
 } from 'state/data';
 
@@ -107,6 +108,10 @@ class Client {
 
   public NewTransaction(session: Session, data: Transaction, cb: ClientCallback) {
     this.request('/tx', cb, data, session);
+  }
+
+  public GetFile(session: Session, doc: Document, cb: ClientCallback) {
+    this.request('/document/retrieve', cb, doc, session);
   }
 
   public UploadFile(session: Session, req: RequestUpload, cb: ClientCallback) {

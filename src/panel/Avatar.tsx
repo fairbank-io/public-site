@@ -1,16 +1,16 @@
 import * as React from 'react';
+import { CSSProperties } from 'react';
 
 // Component properties
 interface ComponentProps {
   readonly onClick: () => void;
   readonly counter?: number;
   readonly pic?: string;
-  readonly targetRef?: (e: Element | null ) => void;
 }
 
 // Component state
 interface ComponentState {
-  pic: string;
+  holder: string;
 }
 
 class Avatar extends React.Component<ComponentProps, ComponentState> {
@@ -22,7 +22,7 @@ class Avatar extends React.Component<ComponentProps, ComponentState> {
   constructor(props: ComponentProps) {
     super(props);
     this.state = {
-      pic: 'avatar sample-0' + (Math.floor(Math.random() * 5) + 1)
+      holder: 'avatar sample-0' + (Math.floor(Math.random() * 5) + 1)
     };
   }
 
@@ -33,8 +33,18 @@ class Avatar extends React.Component<ComponentProps, ComponentState> {
       badge = <span className="badge badge-alert">{this.props.counter}</span>;
     }
 
+    // Set user pic, if any
+    let st: CSSProperties = {};
+    if (this.props.pic !== '') {
+      st.backgroundImage = 'url(' + this.props.pic + ')';
+    }
+
     return (
-      <span className={this.state.pic} onClick={this.props.onClick}>
+      <span
+        className={this.state.holder}
+        onClick={this.props.onClick}
+        style={st}
+      >
         {badge}
       </span>
     );

@@ -6,6 +6,7 @@ import DesktopMenu from 'panel/DesktopMenu';
 // Component properties
 interface ComponentProps {
   readonly notificationsCounter: number;
+  readonly avatar: string;
   readonly onLogoutRequest: () => void;
 }
 
@@ -31,6 +32,7 @@ class Header extends React.Component<ComponentProps, ComponentState> {
             </div>
             <div className="col-md-6">
               <Avatar
+                pic={this.props.avatar}
                 counter={this.props.notificationsCounter}
                 onClick={this.toggleMenu}
               />
