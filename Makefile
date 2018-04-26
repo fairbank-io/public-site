@@ -4,6 +4,7 @@ VERSION=0.2.1
 
 docker: ## Build docker image
 	yarn build
+	rm build/static/js/*.map
 	docker build -t registry.fairbank.io/public-site:$(VERSION) .
 
 clean: ## Remove temporary files
