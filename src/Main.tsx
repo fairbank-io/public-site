@@ -21,6 +21,7 @@ class Main extends React.Component<ComponentProps, ComponentState> {
           <Route component={HomeMain} />
         </Switch>
         <Footer />
+        <code className="d-none">{process.env.REACT_APP_BUILD_CODE}</code>
       </section>
     );
   }

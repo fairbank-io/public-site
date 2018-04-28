@@ -50,7 +50,7 @@ class TransactionsTable extends React.Component<ComponentProps, ComponentState> 
                   <td>{formatAmount(Number(tx.amount / 100), tx.currency)}</td>
                   <td>{formatAmount(Number(tx.fees / 100), tx.currency)}</td>
                   <td>{tx.currency.toUpperCase()}</td>
-                  <td className="d-none d-md-table-cell">{moment( tx.time).format('MMMM Do YYYY, h:mm a')}</td>
+                  <td className="d-none d-md-table-cell">{moment(tx.time).format('MMMM Do YYYY, h:mm a')}</td>
                 </tr>
               );
             })
