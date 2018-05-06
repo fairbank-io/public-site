@@ -23,7 +23,7 @@ class TransactionsTable extends React.Component<ComponentProps, ComponentState> 
   public render(): JSX.Element {
     let am: number = 0;
     this.props.txList.forEach(function(t: Transaction) {
-      am += t.amount;
+      am += Number(t.amount);
     });
     let total: string = formatAmount(am / 100, 'USD');
     return (
