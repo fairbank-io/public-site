@@ -54,7 +54,7 @@ a.logo {
   display: block;
   height: 60px;
   margin: 0 auto;
-  width: 300px;
+  width: 280px;
 }
 
 a.router-navlink {
@@ -64,6 +64,8 @@ a.router-navlink {
 }
 
 div.modal {
+  overflow-y: scroll;
+
   div.modal-header {
     background-color: $purple;
     color: $white;
@@ -148,14 +150,14 @@ form div.inline-input {
 // Home screen
 section.home {
   background: url('../images/bg_main@2x.png') no-repeat top center;
-  background-size: 340%;
+  background-size: 500%;
   padding-top: 40px;
 
   div.phone {
     background: url('../images/phone@2x.png') no-repeat center center;
     background-size: contain;
-    height: 660px;
-    margin-top: 40px;
+    height: 560px;
+    margin-top: 0;
     position: relative;
     width: 100%;
 
@@ -171,7 +173,7 @@ section.home {
   }
 
   div.desc {
-    font-size: 1.2em;
+    font-size: 1.1em;
 
     h1 {
       color: $white;
@@ -393,7 +395,7 @@ section.panel {
 // Medium devices (tablets, 768px and up)
 @include media-breakpoint-up(md) {
   section.home {
-    background-size: 230%;
+    background-size: 240%;
   }
 
   a.logo {
@@ -402,6 +404,9 @@ section.panel {
 
   section.home {
     div.phone {
+      height: 660px;
+      margin-top: 40px;
+
       div.sample-card {
         width: 60%;
       }
@@ -456,6 +461,6 @@ section.panel {
 // Large devices (desktops, 992px and up)
 @include media-breakpoint-up(lg) {
   section.home {
-    background-size: 120%;
+    background-size: 124%;
   }
 }
