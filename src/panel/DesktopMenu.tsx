@@ -135,7 +135,7 @@ class DesktopMenu extends React.Component<ComponentProps, ComponentState> {
     }
   }
 
-  private autoClose(e: JQuery.Event): void {
+  private autoClose(e: JQuery.TriggeredEvent): void {
     if (this.el) {
       // Detect clicks outside the popper and the target element
       if (!jQuery(e.target).closest(this.el).length && !jQuery(e.target).closest(this.props.target).length ) {

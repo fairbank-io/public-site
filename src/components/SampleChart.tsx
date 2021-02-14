@@ -242,7 +242,7 @@ class SampleChart extends React.Component<ComponentProps, ComponentState> {
       data: this.state.data,
       lineTension: 0.2
     }];
-    this.chart.update(500);
+    this.chart.update();
   }
 }
 

@@ -1,11 +1,12 @@
 .PHONY: build
 default: help
-VERSION=0.2.1
+VERSION=0.2.2
+DOCKER_IMAGE=registry.fairbank.io/public-site
 
 docker: ## Build docker image
-	yarn build
+	npm build
 	rm build/static/js/*.map
-	docker build -t registry.fairbank.io/public-site:$(VERSION) .
+	docker build -t $(DOCKER_IMAGE):$(VERSION) .
 
 clean: ## Remove temporary files
 	@rm -rf build
@@ -14,17 +15,17 @@ clean: ## Remove temporary files
 	@rm -rf src/assets/css
 
 build: ## Build for production
-	yarn run build
+	npm run build
 
 start: ## Run dev server
-	yarn run start
+	npm run start
 
 deps: ## Install required dependencies
-	yarn install
+	npm install
 
 deps-update: ## Update dependencies
 	ncu -ua
-	yarn install
+	npm install
 
 help: ## Display available make targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[33m%-16s\033[0m %s\n", $$1, $$2}'

@@ -15,7 +15,7 @@ class Accordion extends React.Component<ComponentProps, {}> {
   };
 
   // Parent DOM element
-  holder: Element | null;
+  holder: HTMLElement | null;
 
   constructor(props: ComponentProps) {
     super(props);

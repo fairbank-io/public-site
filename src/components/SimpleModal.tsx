@@ -62,7 +62,7 @@ class SimpleModal extends React.Component<ComponentProps, ComponentState> {
     }
 
     if (this.props.closeWithBackdrop) {
-      jQuery(this.overlay).on('click', null, null, (e: JQuery.Event) => {
+      jQuery(this.overlay).on('click', null, null, (e: JQuery.TriggeredEvent) => {
         e.preventDefault();
         if (this.dialog) {
           if (!jQuery(e.target).closest(this.dialog).length) {

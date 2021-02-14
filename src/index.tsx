@@ -15,6 +15,7 @@ import { ApplicationStore } from 'state';
 import Main from 'Main';
 
 ReactDOM.render(
+  // @ts-ignore
   <Provider store={ApplicationStore}>
     <Router forceRefresh={!('pushState' in window.history)}>
       <Route component={Main} />
